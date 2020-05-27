@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.7.7 on darwin)" generated="20200522 16:22:53.061" rpa="false">
+<suite id="s1" name="Payment" source="/Users/bond/Documents/Paylo/User-Payment/Payment.robot">
+<test id="s1-t1" name="TC02 Pay with Stripe">
+<kw name="Open Stripe browser" library="Keyword_user_pay" type="setup">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${stripe_url}</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20200522 16:22:53.365" level="INFO">Opening browser 'chrome' to base url 'https://staging-pay.pay-lo.com/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlSEp0ZHpScCIsImV4cCI6MTU5MDE2NzIwMSwiaWF0IjoxNTkwMDgwODAxfQ.H272E-XWyLbBF8pojyCdeirpaz9_5DvKLnvekB838yc/creditcard'.</msg>
+<status status="PASS" starttime="20200522 16:22:53.364" endtime="20200522 16:23:01.749"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200522 16:23:01.750" endtime="20200522 16:23:02.016"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0.5</arg>
+</arguments>
+<status status="PASS" starttime="20200522 16:23:02.016" endtime="20200522 16:23:02.016"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>8s</arg>
+</arguments>
+<msg timestamp="20200522 16:23:10.017" level="INFO">Slept 8 seconds</msg>
+<status status="PASS" starttime="20200522 16:23:02.017" endtime="20200522 16:23:10.017"></status>
+</kw>
+<status status="PASS" starttime="20200522 16:22:53.364" endtime="20200522 16:23:10.018"></status>
+</kw>
+<kw name="Input credit card number" library="Keyword_user_pay">
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${cardno_xpath}</arg>
+<arg>4242 4242 4242 4242</arg>
+</arguments>
+<msg timestamp="20200522 16:23:10.019" level="INFO">Typing text '4242 4242 4242 4242' into text field 'id=cardNumber'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20200522 16:23:11.686" level="INFO" html="yes">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-17.png"&gt;&lt;img src="selenium-screenshot-17.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20200522 16:23:10.548" endtime="20200522 16:23:11.686"></status>
+</kw>
+<msg timestamp="20200522 16:23:11.692" level="FAIL">InvalidElementStateException: Message: invalid element state
+  (Session info: chrome=81.0.4044.138)
+</msg>
+<status status="FAIL" starttime="20200522 16:23:10.019" endtime="20200522 16:23:11.692"></status>
+</kw>
+<status status="FAIL" starttime="20200522 16:23:10.018" endtime="20200522 16:23:11.692"></status>
+</kw>
+<kw name="Close All Browsers" library="SeleniumLibrary" type="teardown">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" starttime="20200522 16:23:11.693" endtime="20200522 16:23:12.277"></status>
+</kw>
+<status status="FAIL" starttime="20200522 16:22:53.363" endtime="20200522 16:23:12.277" critical="yes">InvalidElementStateException: Message: invalid element state
+  (Session info: chrome=81.0.4044.138)
+</status>
+</test>
+<status status="FAIL" starttime="20200522 16:22:53.062" endtime="20200522 16:23:12.280"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1">Critical Tests</stat>
+<stat pass="0" fail="1">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" id="s1" name="Payment">Payment</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20200522 16:22:53.322" level="ERROR">Error in file '/Users/bond/Documents/Paylo/common.robot': Importing test library 'HttpLibrary.HTTP' failed: SyntaxError: invalid syntax (__init__.py, line 16)
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  /Library/Frameworks/Python.framework/Versions/3.7/bin
+  /Library/Frameworks/Python.framework/Versions/3.7/lib/python37.zip
+  /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7
+  /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload
+  /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages</msg>
+</errors>
+</robot>

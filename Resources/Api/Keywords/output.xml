@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.7.7 on darwin)" generated="20200526 14:29:50.160" rpa="false">
+<suite id="s1" name="Keyword merchant regis" source="/Users/bond/Documents/Paylo/Resources/Api/Keywords/Keyword_merchant_regis.robot">
+<test id="s1-t1" name="LOGIN_01 : Merchant register successful.">
+<kw name="Merchant register">
+<arguments>
+<arg>200</arg>
+</arguments>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>register</arg>
+<arg>${url-signup}</arg>
+<arg>disable_warnings=0</arg>
+</arguments>
+<msg timestamp="20200526 14:29:50.398" level="INFO">Creating Session using : alias=register, url=https://staging-api-manage.pay-lo.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200526 14:29:50.397" endtime="20200526 14:29:50.398"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200526 14:29:50.399" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" starttime="20200526 14:29:50.398" endtime="20200526 14:29:50.399"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>company_name= BOND Coporation</arg>
+<arg>address= Space XX</arg>
+<arg>business_type= Hotel</arg>
+<arg>product_type= Room</arg>
+<arg>name= nathakrit</arg>
+<arg>contact_email= nathakrit.p@gmail.com</arg>
+<arg>phone= 0998887777</arg>
+<arg>email= nathakrit.p@gmail.com</arg>
+<arg>password= Bb$1234567890</arg>
+</arguments>
+<assign>
+<var>&amp;{data}</var>
+</assign>
+<msg timestamp="20200526 14:29:50.399" level="INFO">&amp;{data} = { company_name= BOND Coporation | address= Space XX | business_type= Hotel | product_type= Room | name= nathakrit | contact_email= nathakrit.p@gmail.com | phone= 0998887777 | email= nathakrit.p@gmail....</msg>
+<status status="PASS" starttime="20200526 14:29:50.399" endtime="20200526 14:29:50.399"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>register</arg>
+<arg>${api-merchant-regis}</arg>
+<arg>data=${data}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200526 14:29:51.731" level="INFO">POST Request : url=https://staging-api-manage.pay-lo.com/merchants/register 
+ path_url=/merchants/register 
+ headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '266'} 
+ body={"company_name": " BOND Coporation", "address": " Space XX", "business_type": " Hotel", "product_type": " Room", "name": " nathakrit", "contact_email": " nathakrit.p@gmail.com", "phone": " 0998887777", "email": " nathakrit.p@gmail.com", "password": " Bb$1234567890"} 
+ </msg>
+<msg timestamp="20200526 14:29:51.731" level="INFO">POST Response : url=https://staging-api-manage.pay-lo.com/merchants/register 
+ status=400, reason=Bad Request 
+ body={"message":"Bad Request","fields":{"email":"Invalid email template"}} 
+ </msg>
+<msg timestamp="20200526 14:29:51.731" level="INFO">/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'staging-api-manage.pay-lo.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200526 14:29:51.731" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20200526 14:29:50.399" endtime="20200526 14:29:51.731"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${resp.status_code}</arg>
+<arg>${status}</arg>
+</arguments>
+<msg timestamp="20200526 14:29:51.732" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<msg timestamp="20200526 14:29:51.732" level="FAIL">400 != 200</msg>
+<status status="FAIL" starttime="20200526 14:29:51.732" endtime="20200526 14:29:51.732"></status>
+</kw>
+<status status="FAIL" starttime="20200526 14:29:50.397" endtime="20200526 14:29:51.733"></status>
+</kw>
+<status status="FAIL" starttime="20200526 14:29:50.396" endtime="20200526 14:29:51.733" critical="yes">400 != 200</status>
+</test>
+<status status="FAIL" starttime="20200526 14:29:50.162" endtime="20200526 14:29:51.734"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1">Critical Tests</stat>
+<stat pass="0" fail="1">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" id="s1" name="Keyword merchant regis">Keyword merchant regis</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20200526 14:29:50.366" level="ERROR">Error in file '/Users/bond/Documents/Paylo/Resources/Api/Keywords/Keyword_merchant_regis.robot': Importing test library 'HttpLibrary.HTTP' failed: SyntaxError: invalid syntax (__init__.py, line 16)
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  /Library/Frameworks/Python.framework/Versions/3.7/bin
+  /Library/Frameworks/Python.framework/Versions/3.7/lib/python37.zip
+  /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7
+  /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload
+  /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages</msg>
+</errors>
+</robot>
