@@ -1,31 +1,444 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generated="20200527 17:29:05.503" generator="Robot 2.9 (Python 2.7.16 on darwin)">
+<robot generated="20200527 17:52:53.260" generator="Robot 2.9 (Python 2.7.16 on darwin)">
 <suite source="/Users/bond/Documents/Paylo/Test-APIs/Approve_merchant.robot" id="s1" name="Approve merchant">
 <test id="s1-t1" name="TC01 : Get merchant ID and Approve merchant.">
-<kw name="Get merchant registered ID and approve">
+<kw name="Get merchant registered ID and approve" library="Keyword_api_backoffice">
 <arguments>
 <arg>200</arg>
 </arguments>
-<msg timestamp="20200527 17:29:05.868" level="FAIL">No keyword with name 'Get merchant registered ID and approve' found.</msg>
-<status status="FAIL" endtime="20200527 17:29:05.868" starttime="20200527 17:29:05.868"></status>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>get merchant</arg>
+<arg>${api-staging}</arg>
+<arg>disable_warnings=1</arg>
+</arguments>
+<msg timestamp="20200527 17:52:53.621" level="INFO">Creating Session using : alias=get merchant, url=https://staging-api-manage.pay-lo.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20200527 17:52:53.621" starttime="20200527 17:52:53.620"></status>
 </kw>
-<status status="FAIL" endtime="20200527 17:29:05.868" critical="yes" starttime="20200527 17:29:05.863">No keyword with name 'Get merchant registered ID and approve' found.</status>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${admin-token}</arg>
+<arg>page=1</arg>
+<arg>perpage=1</arg>
+<arg>status=1</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200527 17:52:53.622" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTEwMzEyNzEsImlhdCI6MTU5MDQyNjQ3MX0.6go...</msg>
+<status status="PASS" endtime="20200527 17:52:53.622" starttime="20200527 17:52:53.622"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>get merchant</arg>
+<arg>${api-get-merchant}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200527 17:52:54.541" level="INFO">GET Request : url=https://staging-api-manage.pay-lo.com/admin/merchants 
+ path_url=/admin/merchants 
+ headers={'status': u'1', 'perpage': u'1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.23.0', 'Connection': 'keep-alive', 'Content-Type': u'application/json', 'page': u'1', 'Authorization': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTEwMzEyNzEsImlhdCI6MTU5MDQyNjQ3MX0.6goViWtkmo7s4_BZ-ismCadkrDpkbm_EFs60X3lfKNU'} 
+ body=None 
+ </msg>
+<msg timestamp="20200527 17:52:54.542" level="INFO">GET Response : url=https://staging-api-manage.pay-lo.com/admin/merchants 
+ status=200, reason=OK 
+ body={"data":[{"id":"5ece4672e8777f001b0e70b4","name":"nathakrit","company_name":"BOND Coporation","email":"nathakrit.p@gmail.com","phone":"0998887777","address":"Space XX","business_type":"Hotel","product_type":"Room","contact_email":"nathakrit.p@gmail.com","status_activity":{"status":"pending","date":1590576754367},"status":"pending","balance":0,"created_at":1590576754369,"total_activity":0},{"id":"5ecce07ae8777f001b0e70a6","name":"Willem111","company_name":"Stoltenberg Group","email":"sniperaek+7@gmail.com","phone":"1231231231","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Room Service","product_type":"Premium","contact_email":"sniperaek+7@gmail.com","status_activity":{"status":"approved","date":1590485181412},"status":"approved","balance":0,"currency":"EUR","bank_account":"DE75 5121 0800 1245 1261 99","vat_number":"DE123456789","created_at":1590485114265,"total_activity":0},{"id":"5ecbe493e8777f001b0e7093","name":"Maron1","company_name":"Ondricka, Macejkovic and Collier","email":"sniperaek+6@gmail.com","phone":"59-1429060","address":"Matrix Next-Generation Channels\t","business_type":"Hotel","product_type":"Premium","contact_email":"sniperaek+6@gmail.com","status_activity":{"status":"approved","date":1590485031089},"status":"approved","balance":0,"currency":"EUR","bank_account":"DE75 5121 0800 1245 1261 99","vat_number":"dsfsdxzfds","created_at":1590420627382,"total_activity":0},{"id":"5ecbe2d1e8777f001b0e7090","name":"Echo","company_name":"Pfannerstill, Bernhard and Carter\t","email":"sniperaek+5@gmail.com","phone":"954488122","address":"Front-Line Mobile Circuit\t","business_type":"Car","product_type":"BMW","contact_email":"sniperaek+5@gmail.com","status_activity":{"status":"approved","date":1590420467677},"status":"approved","balance":0,"created_at":1590420177645,"total_activity":0},{"id":"5ecbe0e0e8777f001b0e708b","name":"Jims","company_name":"Olson, Yundt and Ankunding\t","email":"sniperaek+4@gmail.com","phone":"83-1489512","address":"Front-Line Mobile Circuit\t","business_type":"Hotel","product_type":"","contact_email":"sniperaek+2@gmail.com","status_activity":{"status":"approved","date":1590419747189},"status":"approved","balance":0,"currency":"EUR","bank_account":"GB33 BUKB 2020 1555 5555 55","vat_number":"111","created_at":1590419680069,"total_activity":0},{"id":"5e95ad15821b80001b13be0f","company_name":"Hotel Sea View","email":"billing@hotel-sea-view.com","phone":"001-000-123456789","address":"12344, Ocean Drive, Pasadena, 99123, CA","business_type":"Hotel","product_type":"Boutique","contact_email":"menzelmichael@t-online.de","status_activity":{"status":"approved","date":1586867500428},"status":"approved","balance":0,"created_at":1586867477285,"total_activity":0},{"id":"5e95a4f3821b80001b13be0c","company_name":"Hotel Sea View","email":"billing@hotel-sea-hotel.com","phone":"001-000-123456789","address":"12344, Ocean Drive, Pasadena, 99123, CA","business_type":"Hotel","product_type":"Boutique","contact_email":"menzelmichael@t-online.de","status_activity":{"status":"approved","date":1586865713547},"status":"approved","balance":0,"created_at":1586865395092,"total_activity":0},{"id":"5e95946b821b80001b13be0a","company_name":"Skynet","email":"david.s@20scoops.net","phone":"0947106780","address":"Mars, Cyber District","business_type":"Robotics","product_type":"Terminator","contact_email":"david.s@20scoops.net","status_activity":{"status":"approved","date":1586861237308},"status":"approved","balance":0,"created_at":1586861163938,"total_activity":0},{"id":"5e955db4821b80001b13be04","name":"O'Reilly","company_name":"O'Reilly","email":"sniperaek+103@gmail.com","phone":"800-228-9290","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Room Service","product_type":"Kitchen staffw","contact_email":"muenchen.marriott@marriotthotels.com","status_activity":{"status":"approved","date":1586847182907},"status":"approved","balance":0,"created_at":1586847156372,"total_activity":0},{"id":"5e952591821b80001b13bdf5","name":"Quitzon Inc1","company_name":"Quitzon Inc1","email":"sniperaek+101@gmail.com","phone":"47-9286747","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Hotel","product_type":"Premium","contact_email":"sniperaek+101@gmail.com","status_activity":{"status":"approved","date":1586832847544},"status":"approved","balance":0,"created_at":1586832785890,"total_activity":0},{"id":"5e9524bd821b80001b13bdf4","company_name":"Trantow-Predovic","email":"sniperaek+100@gmail.com","phone":"90-7096454","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Hotel","product_type":"Kitchen staff","contact_email":"sniperaek+100@gmail.com","status_activity":{"status":"rejected","date":1586832693921},"status":"rejected","balance":0,"created_at":1586832573637,"total_activity":0},{"id":"5e8c9b4bd81977001b1634d5","name":"Hotel One","company_name":"Hotel One","email":"menzelmichael0107@gmail.com","phone":"+491736078484","address":"Mauststrasse 1, 88990 Hierstadt","business_type":"Hotel","product_type":"","contact_email":"menzelmichael0107@gmail.com","status_activity":{"status":"approved","date":1586334913184},"status":"approved","balance":0,"created_at":1586273099208,"total_activity":0},{"id":"5e747643f601f0001cbe39b4","company_name":"Suciy Ld.","email":"sniperaek+114@gmail.com","phone":"+55688834345","address":"Suciy Ld.","business_type":"Hotel","contact_email":"sniperaek+113@gmail.com","status_activity":{"status":"approved","date":1584690950128},"status":"approved","balance":0,"created_at":1584690755561,"total_activity":0},{"id":"5e7441a2f601f0001cbe39a9","company_name":"Hummel Funk GmbH","email":"sniperaek+113@gmail.com","phone":"+6765465656","address":"Hummel Funk GmbH","business_type":"Hotel","contact_email":"sniperaek+113@gmail.com","status_activity":{"status":"rejected","date":1584677404262},"status":"rejected","balance":0,"created_at":1584677282141,"total_activity":0},{"id":"5e7440d1aef382001b53fd8a","company_name":"Bauer GbR","email":"sniperaek+112@gmail.com","phone":"+66324236554","address":"Bauer GbR","business_type":"Hotel","contact_email":"sniperaek+112@gmail.com","status_activity":{"status":"approved","date":1584677140536},"status":"approved","balance":0,"created_at":1584677073896,"total_activity":0}],"pagination":{"total":42,"total_pages":3,"current_page":1,"perpage":15}} 
+ </msg>
+<msg timestamp="20200527 17:52:54.542" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20200527 17:52:54.542" starttime="20200527 17:52:53.622"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${resp.status_code}</arg>
+<arg>${status}</arg>
+</arguments>
+<status status="PASS" endtime="20200527 17:52:54.543" starttime="20200527 17:52:54.542"></status>
+</kw>
+<kw name="Get Json Value" library="HttpLibrary.HTTP">
+<doc>Get the target node of the JSON document `json_string` specified by `json_pointer`.</doc>
+<arguments>
+<arg>${resp.text}</arg>
+<arg>/data/0/id</arg>
+</arguments>
+<assign>
+<var>${merchant_id}</var>
+</assign>
+<msg timestamp="20200527 17:52:54.544" level="INFO">${merchant_id} = "5ece4672e8777f001b0e70b4"</msg>
+<status status="PASS" endtime="20200527 17:52:54.544" starttime="20200527 17:52:54.543"></status>
+</kw>
+<kw name="Remove String Using Regexp" library="String">
+<doc>Removes ``patterns`` from the given ``string``.</doc>
+<arguments>
+<arg>${merchant_id}</arg>
+<arg>"</arg>
+</arguments>
+<assign>
+<var>${merchant_id}</var>
+</assign>
+<msg timestamp="20200527 17:52:54.545" level="INFO">${merchant_id} = 5ece4672e8777f001b0e70b4</msg>
+<status status="PASS" endtime="20200527 17:52:54.546" starttime="20200527 17:52:54.545"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>approve</arg>
+<arg>${api-staging}</arg>
+<arg>disable_warnings=1</arg>
+</arguments>
+<msg timestamp="20200527 17:52:54.546" level="INFO">Creating Session using : alias=approve, url=https://staging-api-manage.pay-lo.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20200527 17:52:54.547" starttime="20200527 17:52:54.546"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${admin-token}</arg>
+<arg>id=${merchant_id}</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200527 17:52:54.548" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTEwMzEyNzEsImlhdCI6MTU5MDQyNjQ3MX0.6go...</msg>
+<status status="PASS" endtime="20200527 17:52:54.548" starttime="20200527 17:52:54.547"></status>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<doc>Send a PUT request on the session object found using the</doc>
+<arguments>
+<arg>approve</arg>
+<arg>/admin/merchants/${merchant_id}/approve</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200527 17:52:55.334" level="INFO">PUT Request : url=https://staging-api-manage.pay-lo.com/admin/merchants/5ece4672e8777f001b0e70b4/approve 
+ path_url=/admin/merchants/5ece4672e8777f001b0e70b4/approve 
+ headers={'Content-Length': '0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.23.0', 'Connection': 'keep-alive', 'Content-Type': u'application/json', 'id': u'5ece4672e8777f001b0e70b4', 'Authorization': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTEwMzEyNzEsImlhdCI6MTU5MDQyNjQ3MX0.6goViWtkmo7s4_BZ-ismCadkrDpkbm_EFs60X3lfKNU'} 
+ body=None 
+ </msg>
+<msg timestamp="20200527 17:52:55.334" level="INFO">PUT Response : url=https://staging-api-manage.pay-lo.com/admin/merchants/5ece4672e8777f001b0e70b4/approve 
+ status=200, reason=OK 
+ body={"message":"success update status."} 
+ </msg>
+<msg timestamp="20200527 17:52:55.334" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20200527 17:52:55.334" starttime="20200527 17:52:54.549"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${resp.status_code}</arg>
+<arg>${status}</arg>
+</arguments>
+<status status="PASS" endtime="20200527 17:52:55.335" starttime="20200527 17:52:55.334"></status>
+</kw>
+<status status="PASS" endtime="20200527 17:52:55.335" starttime="20200527 17:52:53.619"></status>
+</kw>
+<status status="PASS" endtime="20200527 17:52:55.335" critical="yes" starttime="20200527 17:52:53.619"></status>
 </test>
-<status status="FAIL" endtime="20200527 17:29:05.871" starttime="20200527 17:29:05.507"></status>
+<test id="s1-t2" name="TC02 : Merchant was rejected by Admin.">
+<kw name="Get merchant registered ID and reject" library="Keyword_api_backoffice">
+<arguments>
+<arg>200</arg>
+</arguments>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>get merchant</arg>
+<arg>${api-staging}</arg>
+<arg>disable_warnings=1</arg>
+</arguments>
+<msg timestamp="20200527 17:52:55.338" level="INFO">Creating Session using : alias=get merchant, url=https://staging-api-manage.pay-lo.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20200527 17:52:55.338" starttime="20200527 17:52:55.337"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${admin-token}</arg>
+<arg>page=1</arg>
+<arg>perpage=1</arg>
+<arg>status=1</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200527 17:52:55.340" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTEwMzEyNzEsImlhdCI6MTU5MDQyNjQ3MX0.6go...</msg>
+<status status="PASS" endtime="20200527 17:52:55.340" starttime="20200527 17:52:55.339"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>get merchant</arg>
+<arg>${api-get-merchant}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200527 17:52:55.874" level="INFO">GET Request : url=https://staging-api-manage.pay-lo.com/admin/merchants 
+ path_url=/admin/merchants 
+ headers={'status': u'1', 'perpage': u'1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.23.0', 'Connection': 'keep-alive', 'Content-Type': u'application/json', 'page': u'1', 'Authorization': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTEwMzEyNzEsImlhdCI6MTU5MDQyNjQ3MX0.6goViWtkmo7s4_BZ-ismCadkrDpkbm_EFs60X3lfKNU'} 
+ body=None 
+ </msg>
+<msg timestamp="20200527 17:52:55.874" level="INFO">GET Response : url=https://staging-api-manage.pay-lo.com/admin/merchants 
+ status=200, reason=OK 
+ body={"data":[{"id":"5ece4672e8777f001b0e70b4","name":"nathakrit","company_name":"BOND Coporation","email":"nathakrit.p@gmail.com","phone":"0998887777","address":"Space XX","business_type":"Hotel","product_type":"Room","contact_email":"nathakrit.p@gmail.com","status_activity":{"status":"approved","date":1590576774971},"status":"approved","balance":0,"created_at":1590576754369,"total_activity":0},{"id":"5ecce07ae8777f001b0e70a6","name":"Willem111","company_name":"Stoltenberg Group","email":"sniperaek+7@gmail.com","phone":"1231231231","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Room Service","product_type":"Premium","contact_email":"sniperaek+7@gmail.com","status_activity":{"status":"approved","date":1590485181412},"status":"approved","balance":0,"currency":"EUR","bank_account":"DE75 5121 0800 1245 1261 99","vat_number":"DE123456789","created_at":1590485114265,"total_activity":0},{"id":"5ecbe493e8777f001b0e7093","name":"Maron1","company_name":"Ondricka, Macejkovic and Collier","email":"sniperaek+6@gmail.com","phone":"59-1429060","address":"Matrix Next-Generation Channels\t","business_type":"Hotel","product_type":"Premium","contact_email":"sniperaek+6@gmail.com","status_activity":{"status":"approved","date":1590485031089},"status":"approved","balance":0,"currency":"EUR","bank_account":"DE75 5121 0800 1245 1261 99","vat_number":"dsfsdxzfds","created_at":1590420627382,"total_activity":0},{"id":"5ecbe2d1e8777f001b0e7090","name":"Echo","company_name":"Pfannerstill, Bernhard and Carter\t","email":"sniperaek+5@gmail.com","phone":"954488122","address":"Front-Line Mobile Circuit\t","business_type":"Car","product_type":"BMW","contact_email":"sniperaek+5@gmail.com","status_activity":{"status":"approved","date":1590420467677},"status":"approved","balance":0,"created_at":1590420177645,"total_activity":0},{"id":"5ecbe0e0e8777f001b0e708b","name":"Jims","company_name":"Olson, Yundt and Ankunding\t","email":"sniperaek+4@gmail.com","phone":"83-1489512","address":"Front-Line Mobile Circuit\t","business_type":"Hotel","product_type":"","contact_email":"sniperaek+2@gmail.com","status_activity":{"status":"approved","date":1590419747189},"status":"approved","balance":0,"currency":"EUR","bank_account":"GB33 BUKB 2020 1555 5555 55","vat_number":"111","created_at":1590419680069,"total_activity":0},{"id":"5e95ad15821b80001b13be0f","company_name":"Hotel Sea View","email":"billing@hotel-sea-view.com","phone":"001-000-123456789","address":"12344, Ocean Drive, Pasadena, 99123, CA","business_type":"Hotel","product_type":"Boutique","contact_email":"menzelmichael@t-online.de","status_activity":{"status":"approved","date":1586867500428},"status":"approved","balance":0,"created_at":1586867477285,"total_activity":0},{"id":"5e95a4f3821b80001b13be0c","company_name":"Hotel Sea View","email":"billing@hotel-sea-hotel.com","phone":"001-000-123456789","address":"12344, Ocean Drive, Pasadena, 99123, CA","business_type":"Hotel","product_type":"Boutique","contact_email":"menzelmichael@t-online.de","status_activity":{"status":"approved","date":1586865713547},"status":"approved","balance":0,"created_at":1586865395092,"total_activity":0},{"id":"5e95946b821b80001b13be0a","company_name":"Skynet","email":"david.s@20scoops.net","phone":"0947106780","address":"Mars, Cyber District","business_type":"Robotics","product_type":"Terminator","contact_email":"david.s@20scoops.net","status_activity":{"status":"approved","date":1586861237308},"status":"approved","balance":0,"created_at":1586861163938,"total_activity":0},{"id":"5e955db4821b80001b13be04","name":"O'Reilly","company_name":"O'Reilly","email":"sniperaek+103@gmail.com","phone":"800-228-9290","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Room Service","product_type":"Kitchen staffw","contact_email":"muenchen.marriott@marriotthotels.com","status_activity":{"status":"approved","date":1586847182907},"status":"approved","balance":0,"created_at":1586847156372,"total_activity":0},{"id":"5e952591821b80001b13bdf5","name":"Quitzon Inc1","company_name":"Quitzon Inc1","email":"sniperaek+101@gmail.com","phone":"47-9286747","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Hotel","product_type":"Premium","contact_email":"sniperaek+101@gmail.com","status_activity":{"status":"approved","date":1586832847544},"status":"approved","balance":0,"created_at":1586832785890,"total_activity":0},{"id":"5e9524bd821b80001b13bdf4","company_name":"Trantow-Predovic","email":"sniperaek+100@gmail.com","phone":"90-7096454","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Hotel","product_type":"Kitchen staff","contact_email":"sniperaek+100@gmail.com","status_activity":{"status":"rejected","date":1586832693921},"status":"rejected","balance":0,"created_at":1586832573637,"total_activity":0},{"id":"5e8c9b4bd81977001b1634d5","name":"Hotel One","company_name":"Hotel One","email":"menzelmichael0107@gmail.com","phone":"+491736078484","address":"Mauststrasse 1, 88990 Hierstadt","business_type":"Hotel","product_type":"","contact_email":"menzelmichael0107@gmail.com","status_activity":{"status":"approved","date":1586334913184},"status":"approved","balance":0,"created_at":1586273099208,"total_activity":0},{"id":"5e747643f601f0001cbe39b4","company_name":"Suciy Ld.","email":"sniperaek+114@gmail.com","phone":"+55688834345","address":"Suciy Ld.","business_type":"Hotel","contact_email":"sniperaek+113@gmail.com","status_activity":{"status":"approved","date":1584690950128},"status":"approved","balance":0,"created_at":1584690755561,"total_activity":0},{"id":"5e7441a2f601f0001cbe39a9","company_name":"Hummel Funk GmbH","email":"sniperaek+113@gmail.com","phone":"+6765465656","address":"Hummel Funk GmbH","business_type":"Hotel","contact_email":"sniperaek+113@gmail.com","status_activity":{"status":"rejected","date":1584677404262},"status":"rejected","balance":0,"created_at":1584677282141,"total_activity":0},{"id":"5e7440d1aef382001b53fd8a","company_name":"Bauer GbR","email":"sniperaek+112@gmail.com","phone":"+66324236554","address":"Bauer GbR","business_type":"Hotel","contact_email":"sniperaek+112@gmail.com","status_activity":{"status":"approved","date":1584677140536},"status":"approved","balance":0,"created_at":1584677073896,"total_activity":0}],"pagination":{"total":42,"total_pages":3,"current_page":1,"perpage":15}} 
+ </msg>
+<msg timestamp="20200527 17:52:55.874" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20200527 17:52:55.874" starttime="20200527 17:52:55.340"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${resp.status_code}</arg>
+<arg>${status}</arg>
+</arguments>
+<status status="PASS" endtime="20200527 17:52:55.875" starttime="20200527 17:52:55.875"></status>
+</kw>
+<kw name="Get Json Value" library="HttpLibrary.HTTP">
+<doc>Get the target node of the JSON document `json_string` specified by `json_pointer`.</doc>
+<arguments>
+<arg>${resp.text}</arg>
+<arg>/data/0/id</arg>
+</arguments>
+<assign>
+<var>${merchant_id}</var>
+</assign>
+<msg timestamp="20200527 17:52:55.876" level="INFO">${merchant_id} = "5ece4672e8777f001b0e70b4"</msg>
+<status status="PASS" endtime="20200527 17:52:55.877" starttime="20200527 17:52:55.876"></status>
+</kw>
+<kw name="Remove String Using Regexp" library="String">
+<doc>Removes ``patterns`` from the given ``string``.</doc>
+<arguments>
+<arg>${merchant_id}</arg>
+<arg>"</arg>
+</arguments>
+<assign>
+<var>${merchant_id}</var>
+</assign>
+<msg timestamp="20200527 17:52:55.877" level="INFO">${merchant_id} = 5ece4672e8777f001b0e70b4</msg>
+<status status="PASS" endtime="20200527 17:52:55.877" starttime="20200527 17:52:55.877"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>reject</arg>
+<arg>${api-staging}</arg>
+<arg>disable_warnings=1</arg>
+</arguments>
+<msg timestamp="20200527 17:52:55.878" level="INFO">Creating Session using : alias=reject, url=https://staging-api-manage.pay-lo.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20200527 17:52:55.878" starttime="20200527 17:52:55.877"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${admin-token}</arg>
+<arg>id=${merchant_id}</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200527 17:52:55.879" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTEwMzEyNzEsImlhdCI6MTU5MDQyNjQ3MX0.6go...</msg>
+<status status="PASS" endtime="20200527 17:52:55.879" starttime="20200527 17:52:55.878"></status>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<doc>Send a PUT request on the session object found using the</doc>
+<arguments>
+<arg>reject</arg>
+<arg>/admin/merchants/${merchant_id}/reject</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200527 17:52:56.997" level="INFO">PUT Request : url=https://staging-api-manage.pay-lo.com/admin/merchants/5ece4672e8777f001b0e70b4/reject 
+ path_url=/admin/merchants/5ece4672e8777f001b0e70b4/reject 
+ headers={'Content-Length': '0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.23.0', 'Connection': 'keep-alive', 'Content-Type': u'application/json', 'id': u'5ece4672e8777f001b0e70b4', 'Authorization': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTEwMzEyNzEsImlhdCI6MTU5MDQyNjQ3MX0.6goViWtkmo7s4_BZ-ismCadkrDpkbm_EFs60X3lfKNU'} 
+ body=None 
+ </msg>
+<msg timestamp="20200527 17:52:56.998" level="INFO">PUT Response : url=https://staging-api-manage.pay-lo.com/admin/merchants/5ece4672e8777f001b0e70b4/reject 
+ status=200, reason=OK 
+ body={"message":"success update status."} 
+ </msg>
+<msg timestamp="20200527 17:52:56.998" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20200527 17:52:56.998" starttime="20200527 17:52:55.879"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${resp.status_code}</arg>
+<arg>${status}</arg>
+</arguments>
+<status status="PASS" endtime="20200527 17:52:57.000" starttime="20200527 17:52:56.999"></status>
+</kw>
+<status status="PASS" endtime="20200527 17:52:57.000" starttime="20200527 17:52:55.336"></status>
+</kw>
+<status status="PASS" endtime="20200527 17:52:57.000" critical="yes" starttime="20200527 17:52:55.336"></status>
+</test>
+<test id="s1-t3" name="TC03 : Merchant was removed by Admin.">
+<kw name="Delete merchant by ID" library="Keyword_api_backoffice">
+<arguments>
+<arg>200</arg>
+</arguments>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>get merchant</arg>
+<arg>${api-staging}</arg>
+<arg>disable_warnings=1</arg>
+</arguments>
+<msg timestamp="20200527 17:52:57.004" level="INFO">Creating Session using : alias=get merchant, url=https://staging-api-manage.pay-lo.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20200527 17:52:57.004" starttime="20200527 17:52:57.003"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${admin-token}</arg>
+<arg>page=1</arg>
+<arg>perpage=1</arg>
+<arg>status=1</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200527 17:52:57.006" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTEwMzEyNzEsImlhdCI6MTU5MDQyNjQ3MX0.6go...</msg>
+<status status="PASS" endtime="20200527 17:52:57.006" starttime="20200527 17:52:57.005"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>get merchant</arg>
+<arg>${api-get-merchant}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200527 17:52:57.373" level="INFO">GET Request : url=https://staging-api-manage.pay-lo.com/admin/merchants 
+ path_url=/admin/merchants 
+ headers={'status': u'1', 'perpage': u'1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.23.0', 'Connection': 'keep-alive', 'Content-Type': u'application/json', 'page': u'1', 'Authorization': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTEwMzEyNzEsImlhdCI6MTU5MDQyNjQ3MX0.6goViWtkmo7s4_BZ-ismCadkrDpkbm_EFs60X3lfKNU'} 
+ body=None 
+ </msg>
+<msg timestamp="20200527 17:52:57.374" level="INFO">GET Response : url=https://staging-api-manage.pay-lo.com/admin/merchants 
+ status=200, reason=OK 
+ body={"data":[{"id":"5ece4672e8777f001b0e70b4","name":"nathakrit","company_name":"BOND Coporation","email":"nathakrit.p@gmail.com","phone":"0998887777","address":"Space XX","business_type":"Hotel","product_type":"Room","contact_email":"nathakrit.p@gmail.com","status_activity":{"status":"rejected","date":1590576776346},"status":"rejected","balance":0,"created_at":1590576754369,"total_activity":0},{"id":"5ecce07ae8777f001b0e70a6","name":"Willem111","company_name":"Stoltenberg Group","email":"sniperaek+7@gmail.com","phone":"1231231231","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Room Service","product_type":"Premium","contact_email":"sniperaek+7@gmail.com","status_activity":{"status":"approved","date":1590485181412},"status":"approved","balance":0,"currency":"EUR","bank_account":"DE75 5121 0800 1245 1261 99","vat_number":"DE123456789","created_at":1590485114265,"total_activity":0},{"id":"5ecbe493e8777f001b0e7093","name":"Maron1","company_name":"Ondricka, Macejkovic and Collier","email":"sniperaek+6@gmail.com","phone":"59-1429060","address":"Matrix Next-Generation Channels\t","business_type":"Hotel","product_type":"Premium","contact_email":"sniperaek+6@gmail.com","status_activity":{"status":"approved","date":1590485031089},"status":"approved","balance":0,"currency":"EUR","bank_account":"DE75 5121 0800 1245 1261 99","vat_number":"dsfsdxzfds","created_at":1590420627382,"total_activity":0},{"id":"5ecbe2d1e8777f001b0e7090","name":"Echo","company_name":"Pfannerstill, Bernhard and Carter\t","email":"sniperaek+5@gmail.com","phone":"954488122","address":"Front-Line Mobile Circuit\t","business_type":"Car","product_type":"BMW","contact_email":"sniperaek+5@gmail.com","status_activity":{"status":"approved","date":1590420467677},"status":"approved","balance":0,"created_at":1590420177645,"total_activity":0},{"id":"5ecbe0e0e8777f001b0e708b","name":"Jims","company_name":"Olson, Yundt and Ankunding\t","email":"sniperaek+4@gmail.com","phone":"83-1489512","address":"Front-Line Mobile Circuit\t","business_type":"Hotel","product_type":"","contact_email":"sniperaek+2@gmail.com","status_activity":{"status":"approved","date":1590419747189},"status":"approved","balance":0,"currency":"EUR","bank_account":"GB33 BUKB 2020 1555 5555 55","vat_number":"111","created_at":1590419680069,"total_activity":0},{"id":"5e95ad15821b80001b13be0f","company_name":"Hotel Sea View","email":"billing@hotel-sea-view.com","phone":"001-000-123456789","address":"12344, Ocean Drive, Pasadena, 99123, CA","business_type":"Hotel","product_type":"Boutique","contact_email":"menzelmichael@t-online.de","status_activity":{"status":"approved","date":1586867500428},"status":"approved","balance":0,"created_at":1586867477285,"total_activity":0},{"id":"5e95a4f3821b80001b13be0c","company_name":"Hotel Sea View","email":"billing@hotel-sea-hotel.com","phone":"001-000-123456789","address":"12344, Ocean Drive, Pasadena, 99123, CA","business_type":"Hotel","product_type":"Boutique","contact_email":"menzelmichael@t-online.de","status_activity":{"status":"approved","date":1586865713547},"status":"approved","balance":0,"created_at":1586865395092,"total_activity":0},{"id":"5e95946b821b80001b13be0a","company_name":"Skynet","email":"david.s@20scoops.net","phone":"0947106780","address":"Mars, Cyber District","business_type":"Robotics","product_type":"Terminator","contact_email":"david.s@20scoops.net","status_activity":{"status":"approved","date":1586861237308},"status":"approved","balance":0,"created_at":1586861163938,"total_activity":0},{"id":"5e955db4821b80001b13be04","name":"O'Reilly","company_name":"O'Reilly","email":"sniperaek+103@gmail.com","phone":"800-228-9290","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Room Service","product_type":"Kitchen staffw","contact_email":"muenchen.marriott@marriotthotels.com","status_activity":{"status":"approved","date":1586847182907},"status":"approved","balance":0,"created_at":1586847156372,"total_activity":0},{"id":"5e952591821b80001b13bdf5","name":"Quitzon Inc1","company_name":"Quitzon Inc1","email":"sniperaek+101@gmail.com","phone":"47-9286747","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Hotel","product_type":"Premium","contact_email":"sniperaek+101@gmail.com","status_activity":{"status":"approved","date":1586832847544},"status":"approved","balance":0,"created_at":1586832785890,"total_activity":0},{"id":"5e9524bd821b80001b13bdf4","company_name":"Trantow-Predovic","email":"sniperaek+100@gmail.com","phone":"90-7096454","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Hotel","product_type":"Kitchen staff","contact_email":"sniperaek+100@gmail.com","status_activity":{"status":"rejected","date":1586832693921},"status":"rejected","balance":0,"created_at":1586832573637,"total_activity":0},{"id":"5e8c9b4bd81977001b1634d5","name":"Hotel One","company_name":"Hotel One","email":"menzelmichael0107@gmail.com","phone":"+491736078484","address":"Mauststrasse 1, 88990 Hierstadt","business_type":"Hotel","product_type":"","contact_email":"menzelmichael0107@gmail.com","status_activity":{"status":"approved","date":1586334913184},"status":"approved","balance":0,"created_at":1586273099208,"total_activity":0},{"id":"5e747643f601f0001cbe39b4","company_name":"Suciy Ld.","email":"sniperaek+114@gmail.com","phone":"+55688834345","address":"Suciy Ld.","business_type":"Hotel","contact_email":"sniperaek+113@gmail.com","status_activity":{"status":"approved","date":1584690950128},"status":"approved","balance":0,"created_at":1584690755561,"total_activity":0},{"id":"5e7441a2f601f0001cbe39a9","company_name":"Hummel Funk GmbH","email":"sniperaek+113@gmail.com","phone":"+6765465656","address":"Hummel Funk GmbH","business_type":"Hotel","contact_email":"sniperaek+113@gmail.com","status_activity":{"status":"rejected","date":1584677404262},"status":"rejected","balance":0,"created_at":1584677282141,"total_activity":0},{"id":"5e7440d1aef382001b53fd8a","company_name":"Bauer GbR","email":"sniperaek+112@gmail.com","phone":"+66324236554","address":"Bauer GbR","business_type":"Hotel","contact_email":"sniperaek+112@gmail.com","status_activity":{"status":"approved","date":1584677140536},"status":"approved","balance":0,"created_at":1584677073896,"total_activity":0}],"pagination":{"total":42,"total_pages":3,"current_page":1,"perpage":15}} 
+ </msg>
+<msg timestamp="20200527 17:52:57.374" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20200527 17:52:57.374" starttime="20200527 17:52:57.006"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${resp.status_code}</arg>
+<arg>${status}</arg>
+</arguments>
+<status status="PASS" endtime="20200527 17:52:57.375" starttime="20200527 17:52:57.375"></status>
+</kw>
+<kw name="Get Json Value" library="HttpLibrary.HTTP">
+<doc>Get the target node of the JSON document `json_string` specified by `json_pointer`.</doc>
+<arguments>
+<arg>${resp.text}</arg>
+<arg>/data/0/id</arg>
+</arguments>
+<assign>
+<var>${merchant_id}</var>
+</assign>
+<msg timestamp="20200527 17:52:57.376" level="INFO">${merchant_id} = "5ece4672e8777f001b0e70b4"</msg>
+<status status="PASS" endtime="20200527 17:52:57.376" starttime="20200527 17:52:57.375"></status>
+</kw>
+<kw name="Remove String Using Regexp" library="String">
+<doc>Removes ``patterns`` from the given ``string``.</doc>
+<arguments>
+<arg>${merchant_id}</arg>
+<arg>"</arg>
+</arguments>
+<assign>
+<var>${merchant_id}</var>
+</assign>
+<msg timestamp="20200527 17:52:57.377" level="INFO">${merchant_id} = 5ece4672e8777f001b0e70b4</msg>
+<status status="PASS" endtime="20200527 17:52:57.377" starttime="20200527 17:52:57.377"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>delete</arg>
+<arg>${api-staging}</arg>
+<arg>disable_warnings=1</arg>
+</arguments>
+<msg timestamp="20200527 17:52:57.378" level="INFO">Creating Session using : alias=delete, url=https://staging-api-manage.pay-lo.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20200527 17:52:57.378" starttime="20200527 17:52:57.377"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${admin-token}</arg>
+<arg>id=${merchant_id}</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200527 17:52:57.379" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTEwMzEyNzEsImlhdCI6MTU5MDQyNjQ3MX0.6go...</msg>
+<status status="PASS" endtime="20200527 17:52:57.379" starttime="20200527 17:52:57.378"></status>
+</kw>
+<kw name="Delete Request" library="RequestsLibrary">
+<doc>Send a DELETE request on the session object found using the</doc>
+<arguments>
+<arg>delete</arg>
+<arg>/admin/merchants/${merchant_id}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200527 17:52:57.948" level="INFO">DELETE Request : url=https://staging-api-manage.pay-lo.com/admin/merchants/5ece4672e8777f001b0e70b4 
+ path_url=/admin/merchants/5ece4672e8777f001b0e70b4 
+ headers={'Content-Length': '0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.23.0', 'Connection': 'keep-alive', 'Content-Type': u'application/json', 'id': u'5ece4672e8777f001b0e70b4', 'Authorization': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTEwMzEyNzEsImlhdCI6MTU5MDQyNjQ3MX0.6goViWtkmo7s4_BZ-ismCadkrDpkbm_EFs60X3lfKNU'} 
+ body=None 
+ </msg>
+<msg timestamp="20200527 17:52:57.948" level="INFO">DELETE Response : url=https://staging-api-manage.pay-lo.com/admin/merchants/5ece4672e8777f001b0e70b4 
+ status=200, reason=OK 
+ body={"message":"success deleted ."} 
+ </msg>
+<msg timestamp="20200527 17:52:57.948" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20200527 17:52:57.948" starttime="20200527 17:52:57.379"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${resp.status_code}</arg>
+<arg>${status}</arg>
+</arguments>
+<status status="PASS" endtime="20200527 17:52:57.949" starttime="20200527 17:52:57.949"></status>
+</kw>
+<status status="PASS" endtime="20200527 17:52:57.950" starttime="20200527 17:52:57.002"></status>
+</kw>
+<status status="PASS" endtime="20200527 17:52:57.950" critical="yes" starttime="20200527 17:52:57.001"></status>
+</test>
+<status status="PASS" endtime="20200527 17:52:57.950" starttime="20200527 17:52:53.263"></status>
 </suite>
 <statistics>
 <total>
-<stat fail="1" pass="0">Critical Tests</stat>
-<stat fail="1" pass="0">All Tests</stat>
+<stat fail="0" pass="3">Critical Tests</stat>
+<stat fail="0" pass="3">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat fail="1" id="s1" name="Approve merchant" pass="0">Approve merchant</stat>
+<stat fail="0" id="s1" name="Approve merchant" pass="3">Approve merchant</stat>
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20200527 17:29:05.537" level="ERROR">Error in file '/Users/bond/Documents/Paylo/common.robot': Importing test library 'SeleniumLibrary' failed: ImportError: cannot import name PY3
+<msg timestamp="20200527 17:52:53.298" level="ERROR">Error in file '/Users/bond/Documents/Paylo/common.robot': Importing test library 'SeleniumLibrary' failed: ImportError: cannot import name PY3
 Traceback (most recent call last):
   File "/Users/bond/Library/Python/2.7/lib/python/site-packages/SeleniumLibrary/__init__.py", line 26, in &lt;module&gt;
     from SeleniumLibrary.base import DynamicCore, LibraryComponent
@@ -51,7 +464,7 @@ PYTHONPATH:
   /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python
   /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/PyObjC
   /Library/Python/2.7/site-packages/pip-20.0.2-py2.7.egg</msg>
-<msg timestamp="20200527 17:29:05.831" level="ERROR">Error in file '/Users/bond/Documents/Paylo/common.robot': Importing test library 'JSONLibrary' failed: ImportError: No module named JSONLibrary
+<msg timestamp="20200527 17:52:53.581" level="ERROR">Error in file '/Users/bond/Documents/Paylo/common.robot': Importing test library 'JSONLibrary' failed: ImportError: No module named JSONLibrary
 Traceback (most recent call last):
   None
 PYTHONPATH:
@@ -68,6 +481,7 @@ PYTHONPATH:
   /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python
   /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/PyObjC
   /Library/Python/2.7/site-packages/pip-20.0.2-py2.7.egg</msg>
-<msg timestamp="20200527 17:29:05.842" level="ERROR">Error in file '/Users/bond/Documents/Paylo/common.robot': Resource file 'Resources/Api/Keywords/Keyword_api_manage_merchant.robot' does not exist.</msg>
+<msg timestamp="20200527 17:52:53.609" level="ERROR">Error in file '/Users/bond/Documents/Paylo/Resources/Api/Keywords/Keyword_api_backoffice.robot': Setting variable '${api-approve}' failed: Variable '${merchant_id}' not found.</msg>
+<msg timestamp="20200527 17:52:53.613" level="ERROR">Error in file '/Users/bond/Documents/Paylo/Resources/Api/Keywords/Keyword_api_backoffice.robot': Setting variable '${api-reject}' failed: Variable '${merchant_id}' not found.</msg>
 </errors>
 </robot>
