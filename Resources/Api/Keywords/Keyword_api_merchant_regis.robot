@@ -11,14 +11,14 @@ Merchant register
     [Arguments]     ${status}      ${message}
     Create Session       register       ${api-staging}        disable_warnings=0
     &{headers}=   Create Dictionary     Content-Type=application/json     
-    &{data}=    Create Dictionary      company_name=BOND Coporation   
-    ...  address=Space XX
+    &{data}=    Create Dictionary      company_name=TEST
+    ...  address=Mars
     ...  business_type=Hotel
     ...  product_type=Room
-    ...  name=nathakrit
-    ...  contact_email=nathakrit.p@gmail.com
+    ...  name=Sat
+    ...  contact_email=nathakrit.p+1@gmail.com
     ...  phone=0998887777
-    ...  email=nathakrit.p@gmail.com
+    ...  email=nathakrit.p+1@gmail.com
     ...  password=Bb$1234567890
 
     ${resp}=  POST Request    register      ${api-merchant-regis}       data=${data}      headers=${headers}
