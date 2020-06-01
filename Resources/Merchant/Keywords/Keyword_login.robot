@@ -12,14 +12,24 @@ Merchant login
     [Arguments]           ${merchant-email}        ${merchant-pass}         
     Input text     ${email-xpath}       ${merchant-email}
     Click element     ${continue-btn} 
-    Sleep    5s
+    Sleep    2s
     Input text     ${password-xpath}      ${merchant-pass}
     Click element     ${login-btn} 
-    Sleep     5s
+    Sleep     2s
 
 Verify login success
     [Arguments]          ${merchant-name}
     Element Should Contain        ${verify-login-success}          ${merchant-name}
+
+Merchant login after admin approved account
+    [Arguments]           ${email}        ${password}         
+    Input text     ${email-xpath}       ${email}
+    Click element     ${continue-btn} 
+    Sleep    5s
+    Input text     ${password-xpath}      ${password}
+    Click element     ${login-btn} 
+    Sleep     5s
+
 
 
 

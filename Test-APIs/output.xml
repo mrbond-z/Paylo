@@ -1,77 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.1.2 (Python 3.7.7 on darwin)" generated="20200528 12:50:36.000" rpa="false">
-<suite id="s1" name="Merchant register" source="/Users/bond/Documents/Paylo/Test-APIs/Merchant_register.robot">
-<test id="s1-t1" name="LOGIN_01 : Merchant register successful.">
-<kw name="Merchant register" library="Keyword_api_merchant_regis">
+<robot generator="Robot 3.1.2 (Python 3.7.7 on darwin)" generated="20200528 22:54:28.244" rpa="false">
+<suite id="s1" name="Pay" source="/Users/bond/Documents/Paylo/Test-APIs/Pay.robot">
+<test id="s1-t1" name="01 : User can be able to pay with paylo">
+<kw name="Make a payment" library="Keyword_api_pay">
 <arguments>
 <arg>200</arg>
-<arg>success register merchant.</arg>
 </arguments>
 <kw name="Create Session" library="RequestsLibrary">
 <doc>Create Session: create a HTTP session to a server</doc>
 <arguments>
-<arg>register</arg>
-<arg>${api-staging}</arg>
-<arg>disable_warnings=0</arg>
+<arg>payment</arg>
+<arg>${url-payment}</arg>
 </arguments>
-<msg timestamp="20200528 12:50:36.311" level="INFO">Creating Session using : alias=register, url=https://staging-api-manage.pay-lo.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20200528 12:50:36.311" endtime="20200528 12:50:36.311"></status>
+<msg timestamp="20200528 22:54:29.032" level="INFO">Creating Session using : alias=payment, url=http://staging-pay.pay-lo.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200528 22:54:29.031" endtime="20200528 22:54:29.032"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
 <arg>Content-Type=application/json</arg>
+<arg>charset=utf-8</arg>
 </arguments>
 <assign>
 <var>&amp;{headers}</var>
 </assign>
-<msg timestamp="20200528 12:50:36.312" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
-<status status="PASS" starttime="20200528 12:50:36.312" endtime="20200528 12:50:36.312"></status>
+<msg timestamp="20200528 22:54:29.032" level="INFO">&amp;{headers} = { Content-Type=application/json | charset=utf-8 }</msg>
+<status status="PASS" starttime="20200528 22:54:29.032" endtime="20200528 22:54:29.032"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
-<arg>company_name=BOND Coporation</arg>
-<arg>address=Space XX</arg>
-<arg>business_type=Hotel</arg>
-<arg>product_type=Room</arg>
-<arg>name=nathakrit</arg>
-<arg>contact_email=nathakrit.p@gmail.com</arg>
-<arg>phone=0998887777</arg>
+<arg>pbkey=4ad9b1bfce86972fceaacce22205c7c3</arg>
+<arg>pvkey=b5e31dec4ea71691a5d76581ff07d6c08b4e8d67c409320b7eb1cec95e525ba8</arg>
+<arg>name=bond</arg>
 <arg>email=nathakrit.p@gmail.com</arg>
-<arg>password=Bb$1234567890</arg>
+<arg>amount=100</arg>
+<arg>success_url=https://pngriver.com/wp-content/uploads/2018/04/Download-Success-PNG-Image.png</arg>
+<arg>fail_url=https://img.pngio.com/fail-png-97-images-in-collection-page-1-failure-png-660_320.png</arg>
+<arg>back_url=https://image.flaticon.com/icons/svg/0/340.svg</arg>
 </arguments>
 <assign>
 <var>&amp;{data}</var>
 </assign>
-<msg timestamp="20200528 12:50:36.312" level="INFO">&amp;{data} = { company_name=BOND Coporation | address=Space XX | business_type=Hotel | product_type=Room | name=nathakrit | contact_email=nathakrit.p@gmail.com | phone=0998887777 | email=nathakrit.p@gmail.com | pa...</msg>
-<status status="PASS" starttime="20200528 12:50:36.312" endtime="20200528 12:50:36.312"></status>
+<msg timestamp="20200528 22:54:29.033" level="INFO">&amp;{data} = { pbkey=4ad9b1bfce86972fceaacce22205c7c3 | pvkey=b5e31dec4ea71691a5d76581ff07d6c08b4e8d67c409320b7eb1cec95e525ba8 | name=bond | email=nathakrit.p@gmail.com | amount=100 | success_url=https://pngriver....</msg>
+<status status="PASS" starttime="20200528 22:54:29.033" endtime="20200528 22:54:29.033"></status>
 </kw>
 <kw name="Post Request" library="RequestsLibrary">
 <doc>Send a POST request on the session object found using the
 given `alias`</doc>
 <arguments>
-<arg>register</arg>
-<arg>${api-merchant-regis}</arg>
+<arg>payment</arg>
+<arg>${api-pay}</arg>
 <arg>data=${data}</arg>
 <arg>headers=${headers}</arg>
 </arguments>
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20200528 12:50:37.709" level="INFO">POST Request : url=https://staging-api-manage.pay-lo.com/merchants/register 
- path_url=/merchants/register 
- headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '257'} 
- body={"company_name": "BOND Coporation", "address": "Space XX", "business_type": "Hotel", "product_type": "Room", "name": "nathakrit", "contact_email": "nathakrit.p@gmail.com", "phone": "0998887777", "email": "nathakrit.p@gmail.com", "password": "Bb$1234567890"} 
+<msg timestamp="20200528 22:54:30.501" level="INFO">POST Request : url=http://staging-pay.pay-lo.com/v1/payment/request (redirected) 
+ path_url=/v1/payment/request 
+ headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'charset': 'utf-8', 'Content-Length': '449'} 
+ body={"pbkey": "4ad9b1bfce86972fceaacce22205c7c3", "pvkey": "b5e31dec4ea71691a5d76581ff07d6c08b4e8d67c409320b7eb1cec95e525ba8", "name": "bond", "email": "nathakrit.p@gmail.com", "amount": "100", "success_url": "https://pngriver.com/wp-content/uploads/2018/04/Download-Success-PNG-Image.png", "fail_url": "https://img.pngio.com/fail-png-97-images-in-collection-page-1-failure-png-660_320.png", "back_url": "https://image.flaticon.com/icons/svg/0/340.svg"} 
  </msg>
-<msg timestamp="20200528 12:50:37.709" level="INFO">POST Response : url=https://staging-api-manage.pay-lo.com/merchants/register 
+<msg timestamp="20200528 22:54:30.501" level="INFO">GET Response : url=https://staging-pay.pay-lo.com/v1/payment/request 
  status=200, reason=OK 
- body={"message":"success register merchant.","email":"nathakrit.p@gmail.com","id":"5ecf512de8777f001b0e70ba"} 
+ body=&lt;!doctype html&gt;&lt;html lang="TH"&gt;&lt;head&gt;&lt;meta charset="utf-8"/&gt;&lt;link rel="shortcut icon" href="/favicon.ico"/&gt;&lt;meta name="viewport" content="width=device-width,initial-scale=1"/&gt;&lt;meta name="theme-color" content="#000000"/&gt;&lt;link rel="manifest" href="/manifest.json"/&gt;&lt;style&gt;@keyframes skBouncedelay{0%,100%,80%{transform:scale(0)}40%{transform:scale(1)}}.loading-wrapper{display:flex;align-items:center;justify-content:center;position:fixed;height:100vh;left:0;top:0;z-index:99999;background:#fff;width:100vw}.loading div{width:12px;height:12px;background-color:#04bbff;border-radius:100%;display:inline-block;animation:skBouncedelay 1.4s infinite ease-in-out both;margin:4px}.loading div:nth-child(1){animation-delay:-.32s}.loading div:nth-child(2){animation-delay:-.16s}&lt;/style&gt;&lt;title&gt;Paylo&lt;/title&gt;&lt;link href="/static/css/2.764ccc25.chunk.css" rel="stylesheet"&gt;&lt;/head&gt;&lt;body&gt;&lt;noscript&gt;You need to enable JavaScript to run this app.&lt;/noscript&gt;&lt;div id="root"&gt;&lt;div class="loading-wrapper"&gt;&lt;div class="loading"&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;script&gt;!function(a){function e(e){for(var r,t,n=e[0],o=e[1],u=e[2],i=0,c=[];i&lt;n.length;i++)t=n[i],l[t]&amp;&amp;c.push(l[t][0]),l[t]=0;for(r in o)Object.prototype.hasOwnProperty.call(o,r)&amp;&amp;(a[r]=o[r]);for(d&amp;&amp;d(e);c.length;)c.shift()();return p.push.apply(p,u||[]),f()}function f(){for(var e,r=0;r&lt;p.length;r++){for(var t=p[r],n=!0,o=1;o&lt;t.length;o++){var u=t[o];0!==l[u]&amp;&amp;(n=!1)}n&amp;&amp;(p.splice(r--,1),e=s(s.s=t[0]))}return e}var t={},l={1:0},p=[];function s(e){if(t[e])return t[e].exports;var r=t[e]={i:e,l:!1,exports:{}};return a[e].call(r.exports,r,r.exports,s),r.l=!0,r.exports}s.e=function(u){var e=[],t=l[u];if(0!==t)if(t)e.push(t[2]);else{var r=new Promise(function(e,r){t=l[u]=[e,r]});e.push(t[2]=r);var n,i=document.createElement("script");i.charset="utf-8",i.timeout=120,s.nc&amp;&amp;i.setAttribute("nonce",s.nc),i.src=s.p+"static/js/"+({}[u]||u)+"."+{3:"c9198791",4:"6df1ed53",5:"cfbc36c4"}[u]+".chunk.js",n=function(e){i.onerror=i.onload=null,clearTimeout(c);var r=l[u];if(0!==r){if(r){var t=e&amp;&amp;("load"===e.type?"missing":e.type),n=e&amp;&amp;e.target&amp;&amp;e.target.src,o=new Error("Loading chunk "+u+" failed.\n("+t+": "+n+")");o.type=t,o.request=n,r[1](o)}l[u]=void 0}};var c=setTimeout(function(){n({type:"timeout",target:i})},12e4);i.onerror=i.onload=n,document.head.appendChild(i)}return Promise.all(e)},s.m=a,s.c=t,s.d=function(e,r,t){s.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},s.r=function(e){"undefined"!=typeof Symbol&amp;&amp;Symbol.toStringTag&amp;&amp;Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},s.t=function(r,e){if(1&amp;e&amp;&amp;(r=s(r)),8&amp;e)return r;if(4&amp;e&amp;&amp;"object"==typeof r&amp;&amp;r&amp;&amp;r.__esModule)return r;var t=Object.create(null);if(s.r(t),Object.defineProperty(t,"default",{enumerable:!0,value:r}),2&amp;e&amp;&amp;"string"!=typeof r)for(var n in r)s.d(t,n,function(e){return r[e]}.bind(null,n));return t},s.n=function(e){var r=e&amp;&amp;e.__esModule?function(){return e.default}:function(){return e};return s.d(r,"a",r),r},s.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},s.p="/",s.oe=function(e){throw console.error(e),e};var r=window.webpackJsonp=window.webpackJsonp||[],n=r.push.bind(r);r.push=e,r=r.slice();for(var o=0;o&lt;r.length;o++)e(r[o]);var d=n;f()}([])&lt;/script&gt;&lt;script src="/static/js/2.92c0c750.chunk.js"&gt;&lt;/script&gt;&lt;script src="/static/js/main.e9326306.chunk.js"&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt; 
  </msg>
-<msg timestamp="20200528 12:50:37.709" level="INFO">/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'staging-api-manage.pay-lo.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+<msg timestamp="20200528 22:54:30.502" level="INFO">/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'staging-pay.pay-lo.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
   InsecureRequestWarning,</msg>
-<msg timestamp="20200528 12:50:37.710" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20200528 12:50:36.313" endtime="20200528 12:50:37.710"></status>
+<msg timestamp="20200528 22:54:30.502" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200528 22:54:29.033" endtime="20200528 22:54:30.502"></status>
 </kw>
 <kw name="Should Be Equal As Strings" library="BuiltIn">
 <doc>Fails if objects are unequal after converting them to strings.</doc>
@@ -79,38 +77,238 @@ given `alias`</doc>
 <arg>${resp.status_code}</arg>
 <arg>${status}</arg>
 </arguments>
-<msg timestamp="20200528 12:50:37.710" level="INFO">Argument types are:
+<msg timestamp="20200528 22:54:30.503" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20200528 12:50:37.710" endtime="20200528 12:50:37.711"></status>
+<status status="PASS" starttime="20200528 22:54:30.502" endtime="20200528 22:54:30.503"></status>
 </kw>
-<kw name="Should Contain" library="BuiltIn">
-<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<arguments>
-<arg>${resp.text}</arg>
-<arg>${message}</arg>
-</arguments>
-<status status="PASS" starttime="20200528 12:50:37.711" endtime="20200528 12:50:37.711"></status>
+<status status="PASS" starttime="20200528 22:54:29.031" endtime="20200528 22:54:30.503"></status>
 </kw>
-<status status="PASS" starttime="20200528 12:50:36.310" endtime="20200528 12:50:37.711"></status>
-</kw>
-<status status="PASS" starttime="20200528 12:50:36.310" endtime="20200528 12:50:37.712" critical="yes"></status>
+<status status="PASS" starttime="20200528 22:54:29.030" endtime="20200528 22:54:30.503" critical="yes"></status>
 </test>
-<status status="PASS" starttime="20200528 12:50:36.003" endtime="20200528 12:50:37.713"></status>
+<test id="s1-t2" name="02 : Placing payment should be success">
+<kw name="Replacing payment" library="Keyword_api_pay">
+<arguments>
+<arg>200</arg>
+</arguments>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>replacing payment</arg>
+<arg>${url-payment}</arg>
+</arguments>
+<msg timestamp="20200528 22:54:30.506" level="INFO">Creating Session using : alias=replacing payment, url=http://staging-pay.pay-lo.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200528 22:54:30.505" endtime="20200528 22:54:30.506"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token}</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200528 22:54:30.507" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkM0UxWkRkcCIsImV4cCI6MTU5MDIwNDgyMSwiaWF0IjoxNTkwMTE4NDIxfQ.JH0AfM9Cx4zD_Ede2SPArfspPjxagr-UXB6Q7vztZ9g ...</msg>
+<status status="PASS" starttime="20200528 22:54:30.507" endtime="20200528 22:54:30.507"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>replacing payment</arg>
+<arg>${api-replace-payment}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200528 22:54:30.893" level="INFO">GET Request : url=http://staging-pay.pay-lo.com/v1/placing-payments (redirected) 
+ path_url=/v1/placing-payments 
+ headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20200528 22:54:30.893" level="INFO">GET Response : url=https://staging-pay.pay-lo.com/v1/placing-payments 
+ status=200, reason=OK 
+ body=&lt;!doctype html&gt;&lt;html lang="TH"&gt;&lt;head&gt;&lt;meta charset="utf-8"/&gt;&lt;link rel="shortcut icon" href="/favicon.ico"/&gt;&lt;meta name="viewport" content="width=device-width,initial-scale=1"/&gt;&lt;meta name="theme-color" content="#000000"/&gt;&lt;link rel="manifest" href="/manifest.json"/&gt;&lt;style&gt;@keyframes skBouncedelay{0%,100%,80%{transform:scale(0)}40%{transform:scale(1)}}.loading-wrapper{display:flex;align-items:center;justify-content:center;position:fixed;height:100vh;left:0;top:0;z-index:99999;background:#fff;width:100vw}.loading div{width:12px;height:12px;background-color:#04bbff;border-radius:100%;display:inline-block;animation:skBouncedelay 1.4s infinite ease-in-out both;margin:4px}.loading div:nth-child(1){animation-delay:-.32s}.loading div:nth-child(2){animation-delay:-.16s}&lt;/style&gt;&lt;title&gt;Paylo&lt;/title&gt;&lt;link href="/static/css/2.764ccc25.chunk.css" rel="stylesheet"&gt;&lt;/head&gt;&lt;body&gt;&lt;noscript&gt;You need to enable JavaScript to run this app.&lt;/noscript&gt;&lt;div id="root"&gt;&lt;div class="loading-wrapper"&gt;&lt;div class="loading"&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;script&gt;!function(a){function e(e){for(var r,t,n=e[0],o=e[1],u=e[2],i=0,c=[];i&lt;n.length;i++)t=n[i],l[t]&amp;&amp;c.push(l[t][0]),l[t]=0;for(r in o)Object.prototype.hasOwnProperty.call(o,r)&amp;&amp;(a[r]=o[r]);for(d&amp;&amp;d(e);c.length;)c.shift()();return p.push.apply(p,u||[]),f()}function f(){for(var e,r=0;r&lt;p.length;r++){for(var t=p[r],n=!0,o=1;o&lt;t.length;o++){var u=t[o];0!==l[u]&amp;&amp;(n=!1)}n&amp;&amp;(p.splice(r--,1),e=s(s.s=t[0]))}return e}var t={},l={1:0},p=[];function s(e){if(t[e])return t[e].exports;var r=t[e]={i:e,l:!1,exports:{}};return a[e].call(r.exports,r,r.exports,s),r.l=!0,r.exports}s.e=function(u){var e=[],t=l[u];if(0!==t)if(t)e.push(t[2]);else{var r=new Promise(function(e,r){t=l[u]=[e,r]});e.push(t[2]=r);var n,i=document.createElement("script");i.charset="utf-8",i.timeout=120,s.nc&amp;&amp;i.setAttribute("nonce",s.nc),i.src=s.p+"static/js/"+({}[u]||u)+"."+{3:"c9198791",4:"6df1ed53",5:"cfbc36c4"}[u]+".chunk.js",n=function(e){i.onerror=i.onload=null,clearTimeout(c);var r=l[u];if(0!==r){if(r){var t=e&amp;&amp;("load"===e.type?"missing":e.type),n=e&amp;&amp;e.target&amp;&amp;e.target.src,o=new Error("Loading chunk "+u+" failed.\n("+t+": "+n+")");o.type=t,o.request=n,r[1](o)}l[u]=void 0}};var c=setTimeout(function(){n({type:"timeout",target:i})},12e4);i.onerror=i.onload=n,document.head.appendChild(i)}return Promise.all(e)},s.m=a,s.c=t,s.d=function(e,r,t){s.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},s.r=function(e){"undefined"!=typeof Symbol&amp;&amp;Symbol.toStringTag&amp;&amp;Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},s.t=function(r,e){if(1&amp;e&amp;&amp;(r=s(r)),8&amp;e)return r;if(4&amp;e&amp;&amp;"object"==typeof r&amp;&amp;r&amp;&amp;r.__esModule)return r;var t=Object.create(null);if(s.r(t),Object.defineProperty(t,"default",{enumerable:!0,value:r}),2&amp;e&amp;&amp;"string"!=typeof r)for(var n in r)s.d(t,n,function(e){return r[e]}.bind(null,n));return t},s.n=function(e){var r=e&amp;&amp;e.__esModule?function(){return e.default}:function(){return e};return s.d(r,"a",r),r},s.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},s.p="/",s.oe=function(e){throw console.error(e),e};var r=window.webpackJsonp=window.webpackJsonp||[],n=r.push.bind(r);r.push=e,r=r.slice();for(var o=0;o&lt;r.length;o++)e(r[o]);var d=n;f()}([])&lt;/script&gt;&lt;script src="/static/js/2.92c0c750.chunk.js"&gt;&lt;/script&gt;&lt;script src="/static/js/main.e9326306.chunk.js"&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt; 
+ </msg>
+<msg timestamp="20200528 22:54:30.893" level="INFO">/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'staging-pay.pay-lo.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200528 22:54:30.894" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200528 22:54:30.508" endtime="20200528 22:54:30.894"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${resp.status_code}</arg>
+<arg>${status}</arg>
+</arguments>
+<msg timestamp="20200528 22:54:30.895" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200528 22:54:30.894" endtime="20200528 22:54:30.895"></status>
+</kw>
+<status status="PASS" starttime="20200528 22:54:30.505" endtime="20200528 22:54:30.895"></status>
+</kw>
+<status status="PASS" starttime="20200528 22:54:30.504" endtime="20200528 22:54:30.895" critical="yes"></status>
+</test>
+<test id="s1-t3" name="03 : Create payment">
+<kw name="Create payment" library="Keyword_api_pay">
+<arguments>
+<arg>200</arg>
+</arguments>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>create payment</arg>
+<arg>${url-payment}</arg>
+</arguments>
+<msg timestamp="20200528 22:54:30.897" level="INFO">Creating Session using : alias=create payment, url=http://staging-pay.pay-lo.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200528 22:54:30.897" endtime="20200528 22:54:30.898"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token}</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200528 22:54:30.898" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkM0UxWkRkcCIsImV4cCI6MTU5MDIwNDgyMSwiaWF0IjoxNTkwMTE4NDIxfQ.JH0AfM9Cx4zD_Ede2SPArfspPjxagr-UXB6Q7vztZ9g ...</msg>
+<status status="PASS" starttime="20200528 22:54:30.898" endtime="20200528 22:54:30.898"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>create payment</arg>
+<arg>${create-payment}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200528 22:54:31.220" level="INFO">POST Request : url=http://staging-pay.pay-lo.com/v1/payments/stripe/create (redirected) 
+ path_url=/v1/payments/stripe/create 
+ headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg timestamp="20200528 22:54:31.221" level="INFO">GET Response : url=https://staging-pay.pay-lo.com/v1/payments/stripe/create 
+ status=200, reason=OK 
+ body=&lt;!doctype html&gt;&lt;html lang="TH"&gt;&lt;head&gt;&lt;meta charset="utf-8"/&gt;&lt;link rel="shortcut icon" href="/favicon.ico"/&gt;&lt;meta name="viewport" content="width=device-width,initial-scale=1"/&gt;&lt;meta name="theme-color" content="#000000"/&gt;&lt;link rel="manifest" href="/manifest.json"/&gt;&lt;style&gt;@keyframes skBouncedelay{0%,100%,80%{transform:scale(0)}40%{transform:scale(1)}}.loading-wrapper{display:flex;align-items:center;justify-content:center;position:fixed;height:100vh;left:0;top:0;z-index:99999;background:#fff;width:100vw}.loading div{width:12px;height:12px;background-color:#04bbff;border-radius:100%;display:inline-block;animation:skBouncedelay 1.4s infinite ease-in-out both;margin:4px}.loading div:nth-child(1){animation-delay:-.32s}.loading div:nth-child(2){animation-delay:-.16s}&lt;/style&gt;&lt;title&gt;Paylo&lt;/title&gt;&lt;link href="/static/css/2.764ccc25.chunk.css" rel="stylesheet"&gt;&lt;/head&gt;&lt;body&gt;&lt;noscript&gt;You need to enable JavaScript to run this app.&lt;/noscript&gt;&lt;div id="root"&gt;&lt;div class="loading-wrapper"&gt;&lt;div class="loading"&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;script&gt;!function(a){function e(e){for(var r,t,n=e[0],o=e[1],u=e[2],i=0,c=[];i&lt;n.length;i++)t=n[i],l[t]&amp;&amp;c.push(l[t][0]),l[t]=0;for(r in o)Object.prototype.hasOwnProperty.call(o,r)&amp;&amp;(a[r]=o[r]);for(d&amp;&amp;d(e);c.length;)c.shift()();return p.push.apply(p,u||[]),f()}function f(){for(var e,r=0;r&lt;p.length;r++){for(var t=p[r],n=!0,o=1;o&lt;t.length;o++){var u=t[o];0!==l[u]&amp;&amp;(n=!1)}n&amp;&amp;(p.splice(r--,1),e=s(s.s=t[0]))}return e}var t={},l={1:0},p=[];function s(e){if(t[e])return t[e].exports;var r=t[e]={i:e,l:!1,exports:{}};return a[e].call(r.exports,r,r.exports,s),r.l=!0,r.exports}s.e=function(u){var e=[],t=l[u];if(0!==t)if(t)e.push(t[2]);else{var r=new Promise(function(e,r){t=l[u]=[e,r]});e.push(t[2]=r);var n,i=document.createElement("script");i.charset="utf-8",i.timeout=120,s.nc&amp;&amp;i.setAttribute("nonce",s.nc),i.src=s.p+"static/js/"+({}[u]||u)+"."+{3:"c9198791",4:"6df1ed53",5:"cfbc36c4"}[u]+".chunk.js",n=function(e){i.onerror=i.onload=null,clearTimeout(c);var r=l[u];if(0!==r){if(r){var t=e&amp;&amp;("load"===e.type?"missing":e.type),n=e&amp;&amp;e.target&amp;&amp;e.target.src,o=new Error("Loading chunk "+u+" failed.\n("+t+": "+n+")");o.type=t,o.request=n,r[1](o)}l[u]=void 0}};var c=setTimeout(function(){n({type:"timeout",target:i})},12e4);i.onerror=i.onload=n,document.head.appendChild(i)}return Promise.all(e)},s.m=a,s.c=t,s.d=function(e,r,t){s.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},s.r=function(e){"undefined"!=typeof Symbol&amp;&amp;Symbol.toStringTag&amp;&amp;Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},s.t=function(r,e){if(1&amp;e&amp;&amp;(r=s(r)),8&amp;e)return r;if(4&amp;e&amp;&amp;"object"==typeof r&amp;&amp;r&amp;&amp;r.__esModule)return r;var t=Object.create(null);if(s.r(t),Object.defineProperty(t,"default",{enumerable:!0,value:r}),2&amp;e&amp;&amp;"string"!=typeof r)for(var n in r)s.d(t,n,function(e){return r[e]}.bind(null,n));return t},s.n=function(e){var r=e&amp;&amp;e.__esModule?function(){return e.default}:function(){return e};return s.d(r,"a",r),r},s.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},s.p="/",s.oe=function(e){throw console.error(e),e};var r=window.webpackJsonp=window.webpackJsonp||[],n=r.push.bind(r);r.push=e,r=r.slice();for(var o=0;o&lt;r.length;o++)e(r[o]);var d=n;f()}([])&lt;/script&gt;&lt;script src="/static/js/2.92c0c750.chunk.js"&gt;&lt;/script&gt;&lt;script src="/static/js/main.e9326306.chunk.js"&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt; 
+ </msg>
+<msg timestamp="20200528 22:54:31.221" level="INFO">/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'staging-pay.pay-lo.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200528 22:54:31.221" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200528 22:54:30.898" endtime="20200528 22:54:31.221"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${resp.status_code}</arg>
+<arg>${status}</arg>
+</arguments>
+<msg timestamp="20200528 22:54:31.222" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200528 22:54:31.221" endtime="20200528 22:54:31.222"></status>
+</kw>
+<status status="PASS" starttime="20200528 22:54:30.896" endtime="20200528 22:54:31.222"></status>
+</kw>
+<status status="PASS" starttime="20200528 22:54:30.895" endtime="20200528 22:54:31.222" critical="yes"></status>
+</test>
+<test id="s1-t4" name="04 : Proceed payment">
+<kw name="Pay with credit card" library="Keyword_api_pay">
+<arguments>
+<arg>200</arg>
+</arguments>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>proceed payment</arg>
+<arg>${stripe-payment-url}</arg>
+</arguments>
+<msg timestamp="20200528 22:54:31.224" level="INFO">Creating Session using : alias=proceed payment, url=https://m.stripe.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200528 22:54:31.224" endtime="20200528 22:54:31.225"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=text/plain</arg>
+<arg>charset=utf-8</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200528 22:54:31.225" level="INFO">&amp;{headers} = { Content-Type=text/plain | charset=utf-8 }</msg>
+<status status="PASS" starttime="20200528 22:54:31.225" endtime="20200528 22:54:31.225"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>card_number= 4242 4242 4242 4242</arg>
+<arg>expiry_date= 02 / 22</arg>
+<arg>cvc= 333</arg>
+</arguments>
+<assign>
+<var>&amp;{data}</var>
+</assign>
+<msg timestamp="20200528 22:54:31.226" level="INFO">&amp;{data} = { card_number= 4242 4242 4242 4242 | expiry_date= 02 / 22 | cvc= 333 }</msg>
+<status status="PASS" starttime="20200528 22:54:31.226" endtime="20200528 22:54:31.226"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>proceed payment</arg>
+<arg>/4</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200528 22:54:33.456" level="INFO">POST Request : url=https://m.stripe.com/4 
+ path_url=/4 
+ headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg timestamp="20200528 22:54:33.456" level="INFO">POST Response : url=https://m.stripe.com/4 
+ status=200, reason=OK 
+ body=0ceffebf-73c3-414b-a36e-5843bbb5ff23 
+ </msg>
+<msg timestamp="20200528 22:54:33.456" level="INFO">/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'm.stripe.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200528 22:54:33.456" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200528 22:54:31.226" endtime="20200528 22:54:33.456"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${resp.status_code}</arg>
+<arg>${status}</arg>
+</arguments>
+<msg timestamp="20200528 22:54:33.457" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200528 22:54:33.457" endtime="20200528 22:54:33.457"></status>
+</kw>
+<status status="PASS" starttime="20200528 22:54:31.224" endtime="20200528 22:54:33.458"></status>
+</kw>
+<status status="PASS" starttime="20200528 22:54:31.223" endtime="20200528 22:54:33.458" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20200528 22:54:28.247" endtime="20200528 22:54:33.459"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0">Critical Tests</stat>
-<stat pass="1" fail="0">All Tests</stat>
+<stat pass="4" fail="0">Critical Tests</stat>
+<stat pass="4" fail="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" id="s1" name="Merchant register">Merchant register</stat>
+<stat pass="4" fail="0" id="s1" name="Pay">Pay</stat>
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20200528 12:50:36.172" level="ERROR">Error in file '/Users/bond/Documents/Paylo/common.robot': Importing test library 'HttpLibrary.HTTP' failed: SyntaxError: invalid syntax (__init__.py, line 16)
+<msg timestamp="20200528 22:54:28.757" level="ERROR">Error in file '/Users/bond/Documents/Paylo/common.robot': Importing test library 'HttpLibrary.HTTP' failed: SyntaxError: invalid syntax (__init__.py, line 16)
 Traceback (most recent call last):
   None
 PYTHONPATH:
@@ -119,7 +317,7 @@ PYTHONPATH:
   /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7
   /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload
   /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages</msg>
-<msg timestamp="20200528 12:50:36.304" level="ERROR">Error in file '/Users/bond/Documents/Paylo/Resources/Api/Keywords/Keyword_api_backoffice.robot': Setting variable '${api-approve}' failed: Variable '${merchant_id}' not found.</msg>
-<msg timestamp="20200528 12:50:36.307" level="ERROR">Error in file '/Users/bond/Documents/Paylo/Resources/Api/Keywords/Keyword_api_backoffice.robot': Setting variable '${api-reject}' failed: Variable '${merchant_id}' not found.</msg>
+<msg timestamp="20200528 22:54:29.018" level="ERROR">Error in file '/Users/bond/Documents/Paylo/Resources/Api/Keywords/Keyword_api_backoffice.robot': Setting variable '${api-approve}' failed: Variable '${merchant_id}' not found.</msg>
+<msg timestamp="20200528 22:54:29.022" level="ERROR">Error in file '/Users/bond/Documents/Paylo/Resources/Api/Keywords/Keyword_api_backoffice.robot': Setting variable '${api-reject}' failed: Variable '${merchant_id}' not found.</msg>
 </errors>
 </robot>

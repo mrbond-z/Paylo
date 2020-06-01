@@ -13,6 +13,7 @@ TC01 Pay with Paylo should be success.
      Input Back URL        ${back_url}
      Click submit button  
      Click pay with credit card
+     Verify payment with creditcard form
      Click payment button
      Verify errors
 

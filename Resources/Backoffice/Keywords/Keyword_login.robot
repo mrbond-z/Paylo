@@ -29,6 +29,7 @@ Approve merchant
     Sleep     5s
     Element Should Contain    ${verify-modal}     ${modal-header-text}
     Click element     ${confirm-btn} 
+    Sleep     3s
     Wait Until Element Is Visible    ${verify-approve}   
        
 Verify approve success

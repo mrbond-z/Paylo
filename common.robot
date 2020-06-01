@@ -33,9 +33,12 @@ Resource    Resources/User/Variables/Variable_payment.robot
 #Keyword Merchant
 Resource    Resources/Merchant/Keywords/Keyword_login.robot
 Resource    Resources/Merchant/Keywords/Keyword_register.robot
+Resource    Resources/Merchant/Keywords/Keyword_verify_info.robot
 #Variable Merchant
 Resource    Resources/Merchant/Variables/Variable_login.robot
 Resource    Resources/Merchant/Variables/Variable_register.robot
+Resource    Resources/Merchant/Variables/Variable_verify_info.robot
+
 #-------------------------------------------------------------------------------#
 
 #------------------------------Backoffice---------------------------------------#

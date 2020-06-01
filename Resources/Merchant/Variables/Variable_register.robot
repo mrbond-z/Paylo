@@ -1,8 +1,7 @@
 *** Variables ***
 #Xpath
-${url-merchant-register}          https://staging.pay-lo.com/registration
-${signup}             //*[@class="MuiBox-root jss3022 indexview__Footer-sc-1fdlphj-2 jDUEdy"]//following::div
-${field-companyName}     id=field-companyName
+${signup}            //*[@class="MuiContainer-root indexview__MuiContainer-sc-1fdlphj-1 bFTCdu MuiContainer-maxWidthLg"]/div[2]/a[2]
+${field-companyName}      id=field-companyName
 ${field-registeredAddress}     id=field-registeredAddress
 ${field-businessType}     id=field-businessType
 ${continue-step2-btn}     //*[@class="indexview__WrapperBtn-fy6qwq-0 cKmeet"]/button
@@ -19,14 +18,15 @@ ${signup-btn}               //*[@class="indexview__WrapperBtn-fy6qwq-0 cKmeet"]/
 
 
 #Values
-${companyName}       Bond Corporation Co., Ltd.
-${registeredAddress}      Space
-${businessType}     9 Stars Hotel
+${companyName}       Dream High
+${registeredAddress}      MARS
+${businessType}       Capsules Hotel
 ${contactPerson}       Tom
-${contactEmail}        nathakrit.p@gmail.com
+${email}             np@gmail.com
 ${phone}               123456789
 ${password}            Bb$1234567890
 ${wrong-password}      12345678
+
 
 #Verify signup
 ${signup-success}          //*[@id="root"]/div[1]/div/div/h1

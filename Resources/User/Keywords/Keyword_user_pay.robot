@@ -3,9 +3,10 @@ Resource          ../../../common.robot
 
 *** Keywords ***
 Open payment browser
-    Open Browser      ${payment_url}      chrome
+    Open Browser       https://staging-pay.pay-lo.com/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiakEyWm1NMiIsImV4cCI6MTU5MDc2ODgzMCwiaWF0IjoxNTkwNjgyNDMwfQ.KUZOp7gKWw2oU_U7SvlEjpZHdX2STClCDIvDzc84NyA/creditcard      chrome       #${payment_url}
     Maximize Browser Window
     Set Selenium speed   0.5
+    Sleep     8s
 
 Input amount
     [Arguments]        ${amount}
@@ -39,10 +40,15 @@ Click submit button
 Click pay with credit card
     Click element      ${credit_button}        
     # Wait Until Element Contains        ${cardno_xpath}
-    Sleep    8s
+    Sleep    5s
 
-Input credit card number      
-    Input text     ${cardno_xpath}        4242 4242 4242 4242
+Verify payment with creditcard form
+    Element Should Contain      ${verify_credit_form}      Credit Card
+
+Input credit card number     
+    Click element    ${cardno_xpath} 
+    Sleep    3s
+    Input text     ${cardno_xpath}         4242 4242 4242 4242
 
 Input expire date
     Input text     ${cardexp_xpath}        02/22  

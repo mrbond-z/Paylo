@@ -8,4 +8,4 @@ TC01 : Backoffice approve merchant successful.
     Backoffice login      ${backoffice-email}        ${backoffice-pass}
     Verify backoffice login success    ${backoffice-name}
     Approve merchant        ${modal-header-text}
-    #Verify approve success     ${status-approved} 
+    Verify approve success     ${status-approved}  
