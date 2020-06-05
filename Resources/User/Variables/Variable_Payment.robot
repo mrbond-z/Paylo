@@ -4,6 +4,8 @@ ${stripe_url}          https://staging-pay.pay-lo.com/eyJhbGciOiJIUzI1NiIsInR5cC
 ${amount_xpath}        //*[@id="root"]/div/div[2]/div[2]/div[2]/form/div[1]/input
 ${publick_xpath}       //*[@id="root"]/div/div[2]/div[2]/div[2]/form/div[2]/input
 ${privatek_xpath}      //*[@id="root"]/div/div[2]/div[2]/div[2]/form/div[3]/input
+${name-xpath}          //*[@id="root"]/div/div[2]/div[2]/div[2]/form/div[4]/input
+${email-xpath}         //*[@id="root"]/div/div[2]/div[2]/div[2]/form/div[5]/input
 ${success_url_xpath}         //*[@id="root"]/div/div[2]/div[2]/div[2]/form/div[6]/input
 ${fail_url_xpath}            //*[@id="root"]/div/div[2]/div[2]/div[2]/form/div[7]/input
 ${back_url_xpath}            //*[@id="root"]/div/div[2]/div[2]/div[2]/form/div[8]/input
@@ -20,9 +22,14 @@ ${submit_btn}          //*[@class="MuiButton-label"]
 ${amount}      100
 ${public_key}     4ad9b1bfce86972fceaacce22205c7c3
 ${private_key}    b5e31dec4ea71691a5d76581ff07d6c08b4e8d67c409320b7eb1cec95e525ba8
+${name}           BOND
+${email}          nathakrit.p@gmail.com
 ${success_url}    https://pngriver.com/wp-content/uploads/2018/04/Download-Success-PNG-Image.png
 ${fail_url}       https://img.pngio.com/fail-png-97-images-in-collection-page-1-failure-png-660_320.png
 ${back_url}       https://image.flaticon.com/icons/svg/0/340.svg
+
+#Payment form
+${back-btn}       //*[@class="indexview__Wrapper-sc-1311no6-0 dzTgBE"]/div/div/div[2]/a
 
 ${card_number}     4242 4242 4242 4242
 ${exp_date}       02/22

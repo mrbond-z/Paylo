@@ -20,11 +20,11 @@ Check email is existing
     
 
 Go to Login Api and send value
-    [Arguments]     ${merchant_email}       ${merchant_password}       ${status}      
+    [Arguments]          ${status}      
     Create Session      merchant_login     ${api-staging}       disable_warnings=0
     &{headers}=   Create Dictionary     Content-Type=application/json     charset=utf-8
-    &{data}=    Create Dictionary     email=${merchant_email}      
-    ...   password=${merchant_password}
+    &{data}=    Create Dictionary     email=nathakrit.p+9@gmail.com      
+    ...   password=Bb$1234567890
 
     ${resp}=  POST Request  merchant_login    ${api-merchant-login}     data=${data}    headers=${headers}
     Should Be Equal As Strings     ${resp.status_code}      ${status}

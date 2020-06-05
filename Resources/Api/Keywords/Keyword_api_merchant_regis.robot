@@ -8,15 +8,15 @@ ${api-merchant-regis}            /merchants/register
 
 *** Keywords ***
 Merchant register
-    [Arguments]     ${status}      ${message}
+    [Arguments]     ${status}      ${message}     ${email}
     Create Session       register       ${api-staging}        disable_warnings=0
     &{headers}=   Create Dictionary     Content-Type=application/json     
     &{data}=    Create Dictionary      company_name=BOND
     ...  address=Mars
     ...  business_type=Hotel
     ...  product_type=Room
-    ...  name=Sat
-    ...  contact_email=nathakrit.p+9@gmail.com
+    ...  name=Test
+    ...  contact_email=${email}
     ...  phone=0998887777
     ...  email=nathakrit.p+9@gmail.com
     ...  password=Bb$1234567890

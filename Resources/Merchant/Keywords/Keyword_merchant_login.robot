@@ -10,7 +10,7 @@ Open merchant browser
 
 Merchant login
     [Arguments]           ${merchant-email}        ${merchant-pass}         
-    Input text     ${email-xpath}       ${merchant-email}
+    Input text     ${email-field}        ${merchant-email}
     Click element     ${continue-btn} 
     Sleep    2s
     Input text     ${password-xpath}      ${merchant-pass}

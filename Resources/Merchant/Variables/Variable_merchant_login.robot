@@ -4,7 +4,7 @@
 ${merchant_url}      https://staging.pay-lo.com/merchant/signin
 
 #login form
-${email-xpath}       id=field-email
+${email-field}       id=field-email
 ${continue-btn}      id=signin-button
 ${login-btn}         //*[@class="MuiButton-label"]/span
 ${password-xpath}     id=field-password

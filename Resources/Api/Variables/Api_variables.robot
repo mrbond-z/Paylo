@@ -17,6 +17,9 @@ ${admin_password}    20Scoops#
 #Payment api
 ${url-payment}      http://staging-pay.pay-lo.com
 
+#Test account for register and delete
+${email-delete}         nathakrit.p+9@gmail.com
+
 #Token
-${admin-token}          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTEwMzEyNzEsImlhdCI6MTU5MDQyNjQ3MX0.6goViWtkmo7s4_BZ-ismCadkrDpkbm_EFs60X3lfKNU
+${admin-token}          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTE2ODM3OTIsImlhdCI6MTU5MTA3ODk5Mn0.etUcVqt6WirnaOoUihMKl1_PPTZ4G3CIXlNdP96tlaU
 

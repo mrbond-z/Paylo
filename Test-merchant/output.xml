@@ -1,213 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.1.2 (Python 3.7.7 on darwin)" generated="20200527 18:09:19.397" rpa="false">
-<suite id="s1" name="Register" source="/Users/bond/Documents/Paylo/Test-merchant/Register.robot">
-<test id="s1-t1" name="TC01 : Merchant register successful.">
-<kw name="Go to merchant register" library="Keyword_register" type="setup">
+<robot generator="Robot 3.1.2 (Python 3.7.7 on darwin)" generated="20200604 10:47:48.106" rpa="false">
+<suite id="s1" name="Login" source="/Users/bond/Documents/Paylo/Test-merchant/Login.robot">
+<test id="s1-t1" name="TC01 : Merchant login success">
+<kw name="Open merchant browser" library="Keyword_merchant_login" type="setup">
 <kw name="Open Browser" library="SeleniumLibrary">
 <doc>Opens a new browser instance to the optional ``url``.</doc>
 <arguments>
-<arg>${url-merchant-register}</arg>
+<arg>${merchant_url}</arg>
 <arg>chrome</arg>
 </arguments>
-<msg timestamp="20200527 18:09:23.800" level="INFO">Opening browser 'chrome' to base url 'https://staging.pay-lo.com/registration'.</msg>
-<status status="PASS" starttime="20200527 18:09:23.800" endtime="20200527 18:09:28.725"></status>
+<msg timestamp="20200604 10:47:48.499" level="INFO">Opening browser 'chrome' to base url 'https://staging.pay-lo.com/merchant/signin'.</msg>
+<status status="PASS" starttime="20200604 10:47:48.499" endtime="20200604 10:47:53.604"></status>
 </kw>
 <kw name="Maximize Browser Window" library="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" starttime="20200527 18:09:28.726" endtime="20200527 18:09:28.881"></status>
+<status status="PASS" starttime="20200604 10:47:53.605" endtime="20200604 10:47:53.743"></status>
 </kw>
 <kw name="Set Selenium Speed" library="SeleniumLibrary">
 <doc>Sets the delay that is waited after each Selenium command.</doc>
 <arguments>
 <arg>0.5</arg>
 </arguments>
-<status status="PASS" starttime="20200527 18:09:28.882" endtime="20200527 18:09:28.882"></status>
+<status status="PASS" starttime="20200604 10:47:53.744" endtime="20200604 10:47:53.744"></status>
 </kw>
-<status status="PASS" starttime="20200527 18:09:23.800" endtime="20200527 18:09:28.882"></status>
+<status status="PASS" starttime="20200604 10:47:48.498" endtime="20200604 10:47:53.744"></status>
 </kw>
-<kw name="Merchant register step 1" library="Keyword_register">
+<kw name="Merchant login" library="Keyword_merchant_login">
 <arguments>
-<arg>${companyName}</arg>
-<arg>${registeredAddress}</arg>
-<arg>${businessType}</arg>
+<arg>${merchant-email}</arg>
+<arg>${merchant-pass}</arg>
 </arguments>
 <kw name="Input Text" library="SeleniumLibrary">
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
 <arguments>
-<arg>${field-companyName}</arg>
-<arg>${companyName}</arg>
+<arg>${email-xpath}</arg>
+<arg>${merchant-email}</arg>
 </arguments>
-<msg timestamp="20200527 18:09:28.883" level="INFO">Typing text 'Bond Corporation Co., Ltd.' into text field 'id=field-companyName'.</msg>
-<status status="PASS" starttime="20200527 18:09:28.883" endtime="20200527 18:09:30.666"></status>
+<msg timestamp="20200604 10:47:53.746" level="INFO">Typing text 'nathakrit.p@gmail.com' into text field '//*[@id="root"]/div/div[2]/div[2]/div[2]/form/div[5]/input'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20200604 10:47:55.314" level="INFO" html="yes">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-1.png"&gt;&lt;img src="selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20200604 10:47:54.272" endtime="20200604 10:47:55.314"></status>
 </kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${field-registeredAddress}</arg>
-<arg>${registeredAddress}</arg>
-</arguments>
-<msg timestamp="20200527 18:09:30.668" level="INFO">Typing text 'Space' into text field 'id=field-registeredAddress'.</msg>
-<status status="PASS" starttime="20200527 18:09:30.667" endtime="20200527 18:09:32.276"></status>
+<msg timestamp="20200604 10:47:55.317" level="FAIL">Element with locator '//*[@id="root"]/div/div[2]/div[2]/div[2]/form/div[5]/input' not found.</msg>
+<status status="FAIL" starttime="20200604 10:47:53.746" endtime="20200604 10:47:55.317"></status>
 </kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${field-businessType}</arg>
-<arg>${businessType}</arg>
-</arguments>
-<msg timestamp="20200527 18:09:32.277" level="INFO">Typing text '9 Stars Hotel' into text field 'id=field-businessType'.</msg>
-<status status="PASS" starttime="20200527 18:09:32.277" endtime="20200527 18:09:33.940"></status>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${continue-step2-btn}</arg>
-</arguments>
-<msg timestamp="20200527 18:09:33.941" level="INFO">Clicking element '//*[@class="indexview__WrapperBtn-fy6qwq-0 cKmeet"]/button'.</msg>
-<status status="PASS" starttime="20200527 18:09:33.940" endtime="20200527 18:09:35.022"></status>
-</kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>2s</arg>
-</arguments>
-<msg timestamp="20200527 18:09:37.023" level="INFO">Slept 2 seconds</msg>
-<status status="PASS" starttime="20200527 18:09:35.022" endtime="20200527 18:09:37.024"></status>
-</kw>
-<status status="PASS" starttime="20200527 18:09:28.882" endtime="20200527 18:09:37.024"></status>
-</kw>
-<kw name="Merchant register step 2" library="Keyword_register">
-<arguments>
-<arg>${contactPerson}</arg>
-<arg>${contactEmail}</arg>
-<arg>${phone}</arg>
-</arguments>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${field-contactPerson}</arg>
-<arg>${contactPerson}</arg>
-</arguments>
-<msg timestamp="20200527 18:09:37.025" level="INFO">Typing text 'Tom' into text field 'id=field-contactPerson'.</msg>
-<status status="PASS" starttime="20200527 18:09:37.025" endtime="20200527 18:09:38.626"></status>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${field-contactEmail}</arg>
-<arg>${contactEmail}</arg>
-</arguments>
-<msg timestamp="20200527 18:09:38.626" level="INFO">Typing text 'nathakrit.p@gmail.com' into text field 'id=field-contactEmail'.</msg>
-<status status="PASS" starttime="20200527 18:09:38.626" endtime="20200527 18:09:40.331"></status>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${field-phone}</arg>
-<arg>${phone}</arg>
-</arguments>
-<msg timestamp="20200527 18:09:40.332" level="INFO">Typing text '123456789' into text field 'id=field-phone'.</msg>
-<status status="PASS" starttime="20200527 18:09:40.332" endtime="20200527 18:09:41.974"></status>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${continue-step3-btn}</arg>
-</arguments>
-<msg timestamp="20200527 18:09:41.975" level="INFO">Clicking element '//*[@class="indexview__WrapperBtn-fy6qwq-0 cKmeet"]/button'.</msg>
-<status status="PASS" starttime="20200527 18:09:41.975" endtime="20200527 18:09:43.082"></status>
-</kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>2s</arg>
-</arguments>
-<msg timestamp="20200527 18:09:45.086" level="INFO">Slept 2 seconds</msg>
-<status status="PASS" starttime="20200527 18:09:43.082" endtime="20200527 18:09:45.086"></status>
-</kw>
-<status status="PASS" starttime="20200527 18:09:37.024" endtime="20200527 18:09:45.086"></status>
-</kw>
-<kw name="Merchant register step 3" library="Keyword_register">
-<arguments>
-<arg>${contactEmail}</arg>
-<arg>${password}</arg>
-</arguments>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${field-emailAddress}</arg>
-<arg>${contactEmail}</arg>
-</arguments>
-<msg timestamp="20200527 18:09:45.088" level="INFO">Typing text 'nathakrit.p@gmail.com' into text field 'id=field-emailAddress'.</msg>
-<status status="PASS" starttime="20200527 18:09:45.088" endtime="20200527 18:09:46.806"></status>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${field-password}</arg>
-<arg>${password}</arg>
-</arguments>
-<msg timestamp="20200527 18:09:46.807" level="INFO">Typing text 'Bb$1234567890' into text field 'id=field-password'.</msg>
-<status status="PASS" starttime="20200527 18:09:46.807" endtime="20200527 18:09:48.559"></status>
-</kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>2s</arg>
-</arguments>
-<msg timestamp="20200527 18:09:50.561" level="INFO">Slept 2 seconds</msg>
-<status status="PASS" starttime="20200527 18:09:48.559" endtime="20200527 18:09:50.562"></status>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${signup-btn}</arg>
-</arguments>
-<msg timestamp="20200527 18:09:50.562" level="INFO">Clicking element '//*[@class="indexview__WrapperBtn-fy6qwq-0 cKmeet"]/button'.</msg>
-<status status="PASS" starttime="20200527 18:09:50.562" endtime="20200527 18:09:51.660"></status>
-</kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>4s</arg>
-</arguments>
-<msg timestamp="20200527 18:09:55.662" level="INFO">Slept 4 seconds</msg>
-<status status="PASS" starttime="20200527 18:09:51.660" endtime="20200527 18:09:55.662"></status>
-</kw>
-<status status="PASS" starttime="20200527 18:09:45.087" endtime="20200527 18:09:55.662"></status>
-</kw>
-<kw name="Verify signup success" library="Keyword_register">
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${back-to-home-btn}</arg>
-</arguments>
-<msg timestamp="20200527 18:09:55.664" level="INFO">Clicking element '//*[@class="indexview__Container-sc-1v4jxrt-2 dKaTzj"]/button'.</msg>
-<status status="PASS" starttime="20200527 18:09:55.663" endtime="20200527 18:09:56.849"></status>
-</kw>
-<status status="PASS" starttime="20200527 18:09:55.663" endtime="20200527 18:09:56.849"></status>
+<status status="FAIL" starttime="20200604 10:47:53.745" endtime="20200604 10:47:55.317"></status>
 </kw>
 <kw name="Close All Browsers" library="SeleniumLibrary" type="teardown">
 <doc>Closes all open browsers and resets the browser cache.</doc>
-<status status="PASS" starttime="20200527 18:09:56.849" endtime="20200527 18:09:57.427"></status>
+<status status="PASS" starttime="20200604 10:47:55.318" endtime="20200604 10:47:55.896"></status>
 </kw>
-<status status="PASS" starttime="20200527 18:09:23.799" endtime="20200527 18:09:57.427" critical="yes"></status>
+<status status="FAIL" starttime="20200604 10:47:48.498" endtime="20200604 10:47:55.897" critical="yes">Element with locator '//*[@id="root"]/div/div[2]/div[2]/div[2]/form/div[5]/input' not found.</status>
 </test>
-<status status="PASS" starttime="20200527 18:09:19.399" endtime="20200527 18:09:57.433"></status>
+<status status="FAIL" starttime="20200604 10:47:48.108" endtime="20200604 10:47:55.898"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0">Critical Tests</stat>
-<stat pass="1" fail="0">All Tests</stat>
+<stat pass="0" fail="1">Critical Tests</stat>
+<stat pass="0" fail="1">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" id="s1" name="Register">Register</stat>
+<stat pass="0" fail="1" id="s1" name="Login">Login</stat>
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20200527 18:09:23.474" level="ERROR">Error in file '/Users/bond/Documents/Paylo/common.robot': Importing test library 'HttpLibrary.HTTP' failed: SyntaxError: invalid syntax (__init__.py, line 16)
+<msg timestamp="20200604 10:47:48.308" level="ERROR">Error in file '/Users/bond/Documents/Paylo/common.robot': Importing test library 'HttpLibrary.HTTP' failed: SyntaxError: invalid syntax (__init__.py, line 16)
 Traceback (most recent call last):
   None
 PYTHONPATH:
@@ -216,7 +76,7 @@ PYTHONPATH:
   /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7
   /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload
   /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages</msg>
-<msg timestamp="20200527 18:09:23.794" level="ERROR">Error in file '/Users/bond/Documents/Paylo/Resources/Api/Keywords/Keyword_api_backoffice.robot': Setting variable '${api-approve}' failed: Variable '${merchant_id}' not found.</msg>
-<msg timestamp="20200527 18:09:23.797" level="ERROR">Error in file '/Users/bond/Documents/Paylo/Resources/Api/Keywords/Keyword_api_backoffice.robot': Setting variable '${api-reject}' failed: Variable '${merchant_id}' not found.</msg>
+<msg timestamp="20200604 10:47:48.489" level="ERROR">Error in file '/Users/bond/Documents/Paylo/Resources/Api/Keywords/Keyword_api_backoffice.robot': Setting variable '${api-approve}' failed: Variable '${merchant_id}' not found.</msg>
+<msg timestamp="20200604 10:47:48.492" level="ERROR">Error in file '/Users/bond/Documents/Paylo/Resources/Api/Keywords/Keyword_api_backoffice.robot': Setting variable '${api-reject}' failed: Variable '${merchant_id}' not found.</msg>
 </errors>
 </robot>

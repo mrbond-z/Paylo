@@ -57,11 +57,10 @@ Delete merchant by ID
     Should Be Equal As Strings     ${resp.status_code}      ${status} 
 
 Delete merchant by email 
-    [Arguments]     ${status}         
+    [Arguments]     ${status}         ${email}
     Create Session       delete       ${api-staging}              disable_warnings=0
     &{headers}=   Create Dictionary     Content-Type=application/json        Authorization=${admin-token}
-    &{data}=    Create Dictionary      email=nathakrit.p@gmail.com   
+    &{data}=    Create Dictionary      email=${email}   
 
-    
     ${resp}=  DELETE Request    delete      /admin/merchants       data=${data}      headers=${headers}
     Should Be Equal As Strings     ${resp.status_code}      ${status} 

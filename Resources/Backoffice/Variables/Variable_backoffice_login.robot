@@ -4,10 +4,10 @@
 ${backoffice_url}      https://staging.pay-lo.com/backoffice/signin
 
 #login form
-${email-xpath}       id=field-email
-${continue-btn}      id=signin-button
-${login-btn}         //*[@class="MuiButton-label"]/span
-${password-xpath}     id=field-password
+# ${email-xpath}       id=field-email
+# ${continue-btn}      id=signin-button
+# ${login-btn}         //*[@class="MuiButton-label"]/span
+# ${password-xpath}     id=field-password
 
 
 #values

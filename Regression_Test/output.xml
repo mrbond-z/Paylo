@@ -1,992 +1,584 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.1.2 (Python 3.7.7 on darwin)" generated="20200601 18:29:19.272" rpa="false">
-<suite id="s1" name="Scenario#1" source="/Users/bond/Documents/Paylo/Regression_Test/Scenario#1.robot">
-<test id="s1-t1" name="TC01 : Merchant can be able to register.">
-<kw name="Go to merchant register" library="Keyword_register">
-<kw name="Open Browser" library="SeleniumLibrary">
-<doc>Opens a new browser instance to the optional ``url``.</doc>
+<robot generated="20200605 10:15:44.518" generator="Robot 2.9 (Python 2.7.16 on darwin)">
+<suite source="/Users/bond/Documents/Paylo/Regression_Test/Test_APIs.robot" id="s1" name="Test APIs">
+<test id="s1-t1" name="TC01 : Merchant register success.">
+<kw name="Merchant register" library="Keyword_api_merchant_regis">
 <arguments>
-<arg>${merchant_url}</arg>
-<arg>chrome</arg>
+<arg>200</arg>
+<arg>${email-delete}</arg>
+<arg>success register merchant.</arg>
 </arguments>
-<msg timestamp="20200601 18:29:19.706" level="INFO">Opening browser 'chrome' to base url 'https://staging.pay-lo.com/merchant/signin'.</msg>
-<status status="PASS" starttime="20200601 18:29:19.706" endtime="20200601 18:29:24.470"></status>
-</kw>
-<kw name="Maximize Browser Window" library="SeleniumLibrary">
-<doc>Maximizes current browser window.</doc>
-<status status="PASS" starttime="20200601 18:29:24.471" endtime="20200601 18:29:24.616"></status>
-</kw>
-<kw name="Set Selenium Speed" library="SeleniumLibrary">
-<doc>Sets the delay that is waited after each Selenium command.</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
 <arguments>
-<arg>0.5</arg>
+<arg>register</arg>
+<arg>${api-staging}</arg>
+<arg>disable_warnings=0</arg>
 </arguments>
-<status status="PASS" starttime="20200601 18:29:24.617" endtime="20200601 18:29:24.617"></status>
+<msg timestamp="20200605 10:15:46.721" level="INFO">Creating Session using : alias=register, url=https://staging-api-manage.pay-lo.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20200605 10:15:46.721" starttime="20200605 10:15:46.719"></status>
 </kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
 <arguments>
-<arg>${signup}</arg>
+<arg>Content-Type=application/json</arg>
 </arguments>
-<msg timestamp="20200601 18:29:24.617" level="INFO">Clicking element '//*[@class="MuiContainer-root indexview__MuiContainer-sc-1fdlphj-1 bFTCdu MuiContainer-maxWidthLg"]/div[2]/a[2]'.</msg>
-<status status="PASS" starttime="20200601 18:29:24.617" endtime="20200601 18:29:25.766"></status>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200605 10:15:46.722" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20200605 10:15:46.722" starttime="20200605 10:15:46.721"></status>
 </kw>
-<status status="PASS" starttime="20200601 18:29:19.705" endtime="20200601 18:29:25.766"></status>
-</kw>
-<kw name="Merchant register step 1" library="Keyword_register">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
 <arguments>
-<arg>${companyName}</arg>
-<arg>${registeredAddress}</arg>
-<arg>${businessType}</arg>
+<arg>company_name=BOND</arg>
+<arg>address=Mars</arg>
+<arg>business_type=Hotel</arg>
+<arg>product_type=Room</arg>
+<arg>name=Test</arg>
+<arg>contact_email=${email}</arg>
+<arg>phone=0998887777</arg>
+<arg>email=nathakrit.p+9@gmail.com</arg>
+<arg>password=Bb$1234567890</arg>
 </arguments>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<assign>
+<var>&amp;{data}</var>
+</assign>
+<msg timestamp="20200605 10:15:46.723" level="INFO">&amp;{data} = { company_name=BOND | address=Mars | business_type=Hotel | product_type=Room | name=Test | contact_email=success register merchant. | phone=0998887777 | email=nathakrit.p+9@gmail.com | password=Bb$123...</msg>
+<status status="PASS" endtime="20200605 10:15:46.723" starttime="20200605 10:15:46.722"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
 <arguments>
-<arg>${field-companyName}</arg>
-<arg>${companyName}</arg>
+<arg>register</arg>
+<arg>${api-merchant-regis}</arg>
+<arg>data=${data}</arg>
+<arg>headers=${headers}</arg>
 </arguments>
-<msg timestamp="20200601 18:29:25.767" level="INFO">Typing text 'Dream High' into text field 'id=field-companyName'.</msg>
-<status status="PASS" starttime="20200601 18:29:25.767" endtime="20200601 18:29:27.479"></status>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200605 10:15:47.776" level="INFO">POST Request : url=https://staging-api-manage.pay-lo.com/merchants/register 
+ path_url=/merchants/register 
+ headers={'Content-Length': '244', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.23.0', 'Connection': 'keep-alive', 'Content-Type': u'application/json'} 
+ body={"company_name": "BOND", "address": "Mars", "business_type": "Hotel", "product_type": "Room", "name": "Test", "contact_email": "success register merchant.", "phone": "0998887777", "email": "nathakrit.p+9@gmail.com", "password": "Bb$1234567890"} 
+ </msg>
+<msg timestamp="20200605 10:15:47.777" level="INFO">POST Response : url=https://staging-api-manage.pay-lo.com/merchants/register 
+ status=200, reason=OK 
+ body={"message":"success register merchant.","email":"nathakrit.p+9@gmail.com","id":"5ed9b8e38a3a7f001b008b7e"} 
+ </msg>
+<msg timestamp="20200605 10:15:47.777" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20200605 10:15:47.777" starttime="20200605 10:15:46.723"></status>
 </kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
 <arguments>
-<arg>${field-registeredAddress}</arg>
-<arg>${registeredAddress}</arg>
+<arg>${resp.status_code}</arg>
+<arg>${status}</arg>
 </arguments>
-<msg timestamp="20200601 18:29:27.480" level="INFO">Typing text 'MARS' into text field 'id=field-registeredAddress'.</msg>
-<status status="PASS" starttime="20200601 18:29:27.479" endtime="20200601 18:29:29.111"></status>
+<status status="PASS" endtime="20200605 10:15:47.779" starttime="20200605 10:15:47.778"></status>
 </kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``item1`` does not contain ``item2`` one or more times.</doc>
 <arguments>
-<arg>${field-businessType}</arg>
-<arg>${businessType}</arg>
+<arg>${resp.text}</arg>
+<arg>${message}</arg>
 </arguments>
-<msg timestamp="20200601 18:29:29.113" level="INFO">Typing text 'Capsules Hotel' into text field 'id=field-businessType'.</msg>
-<status status="PASS" starttime="20200601 18:29:29.112" endtime="20200601 18:29:30.828"></status>
+<status status="PASS" endtime="20200605 10:15:47.780" starttime="20200605 10:15:47.779"></status>
 </kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${continue-step2-btn}</arg>
-</arguments>
-<msg timestamp="20200601 18:29:30.829" level="INFO">Clicking element '//*[@class="indexview__WrapperBtn-fy6qwq-0 cKmeet"]/button'.</msg>
-<status status="PASS" starttime="20200601 18:29:30.828" endtime="20200601 18:29:31.920"></status>
+<status status="PASS" endtime="20200605 10:15:47.781" starttime="20200605 10:15:46.718"></status>
 </kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>2s</arg>
-</arguments>
-<msg timestamp="20200601 18:29:33.921" level="INFO">Slept 2 seconds</msg>
-<status status="PASS" starttime="20200601 18:29:31.921" endtime="20200601 18:29:33.921"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:29:25.766" endtime="20200601 18:29:33.922"></status>
-</kw>
-<kw name="Merchant register step 2" library="Keyword_register">
-<arguments>
-<arg>${contactPerson}</arg>
-<arg>${email}</arg>
-<arg>${phone}</arg>
-</arguments>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${field-contactPerson}</arg>
-<arg>${contactPerson}</arg>
-</arguments>
-<msg timestamp="20200601 18:29:33.923" level="INFO">Typing text 'Tom' into text field 'id=field-contactPerson'.</msg>
-<status status="PASS" starttime="20200601 18:29:33.923" endtime="20200601 18:29:35.546"></status>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${field-contactEmail}</arg>
-<arg>${email}</arg>
-</arguments>
-<msg timestamp="20200601 18:29:35.547" level="INFO">Typing text 'np@gmail.com' into text field 'id=field-contactEmail'.</msg>
-<status status="PASS" starttime="20200601 18:29:35.547" endtime="20200601 18:29:37.212"></status>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${field-phone}</arg>
-<arg>${phone}</arg>
-</arguments>
-<msg timestamp="20200601 18:29:37.213" level="INFO">Typing text '123456789' into text field 'id=field-phone'.</msg>
-<status status="PASS" starttime="20200601 18:29:37.213" endtime="20200601 18:29:38.854"></status>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${continue-step3-btn}</arg>
-</arguments>
-<msg timestamp="20200601 18:29:38.855" level="INFO">Clicking element '//*[@class="indexview__WrapperBtn-fy6qwq-0 cKmeet"]/button'.</msg>
-<status status="PASS" starttime="20200601 18:29:38.855" endtime="20200601 18:29:39.943"></status>
-</kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>2s</arg>
-</arguments>
-<msg timestamp="20200601 18:29:41.945" level="INFO">Slept 2 seconds</msg>
-<status status="PASS" starttime="20200601 18:29:39.944" endtime="20200601 18:29:41.945"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:29:33.922" endtime="20200601 18:29:41.945"></status>
-</kw>
-<kw name="Merchant register step 3" library="Keyword_register">
-<arguments>
-<arg>np@gmail.com</arg>
-<arg>${password}</arg>
-</arguments>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${field-emailAddress}</arg>
-<arg>${email}</arg>
-</arguments>
-<msg timestamp="20200601 18:29:41.947" level="INFO">Typing text 'np@gmail.com' into text field 'id=field-emailAddress'.</msg>
-<status status="PASS" starttime="20200601 18:29:41.947" endtime="20200601 18:29:43.627"></status>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${field-password}</arg>
-<arg>${password}</arg>
-</arguments>
-<msg timestamp="20200601 18:29:43.628" level="INFO">Typing text 'Bb$1234567890' into text field 'id=field-password'.</msg>
-<status status="PASS" starttime="20200601 18:29:43.628" endtime="20200601 18:29:45.453"></status>
-</kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>2s</arg>
-</arguments>
-<msg timestamp="20200601 18:29:47.455" level="INFO">Slept 2 seconds</msg>
-<status status="PASS" starttime="20200601 18:29:45.453" endtime="20200601 18:29:47.455"></status>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${signup-btn}</arg>
-</arguments>
-<msg timestamp="20200601 18:29:47.456" level="INFO">Clicking element '//*[@class="indexview__WrapperBtn-fy6qwq-0 cKmeet"]/button'.</msg>
-<status status="PASS" starttime="20200601 18:29:47.456" endtime="20200601 18:29:48.579"></status>
-</kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>4s</arg>
-</arguments>
-<msg timestamp="20200601 18:29:52.581" level="INFO">Slept 4 seconds</msg>
-<status status="PASS" starttime="20200601 18:29:48.580" endtime="20200601 18:29:52.582"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:29:41.946" endtime="20200601 18:29:52.582"></status>
-</kw>
-<kw name="Verify signup success" library="Keyword_register">
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${back-to-home-btn}</arg>
-</arguments>
-<msg timestamp="20200601 18:29:52.584" level="INFO">Clicking element '//*[@class="indexview__Container-sc-1v4jxrt-2 dKaTzj"]/button'.</msg>
-<status status="PASS" starttime="20200601 18:29:52.584" endtime="20200601 18:29:53.764"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:29:52.583" endtime="20200601 18:29:53.764"></status>
-</kw>
-<kw name="Close All Browsers" library="SeleniumLibrary" type="teardown">
-<doc>Closes all open browsers and resets the browser cache.</doc>
-<status status="PASS" starttime="20200601 18:29:53.766" endtime="20200601 18:29:54.345"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:29:19.703" endtime="20200601 18:29:54.346" critical="yes"></status>
+<status status="PASS" endtime="20200605 10:15:47.781" critical="yes" starttime="20200605 10:15:46.716"></status>
 </test>
-<test id="s1-t2" name="TC02 : Backoffice approve merchant successful.">
-<kw name="Open backoffice browser" library="Keyword_login">
-<kw name="Open Browser" library="SeleniumLibrary">
-<doc>Opens a new browser instance to the optional ``url``.</doc>
+<test id="s1-t2" name="TC02 : Backoffice can reject merchant.">
+<kw name="Get merchant registered ID and reject" library="Keyword_api_backoffice">
 <arguments>
-<arg>${backoffice_url}</arg>
-<arg>chrome</arg>
+<arg>200</arg>
 </arguments>
-<msg timestamp="20200601 18:29:54.349" level="INFO">Opening browser 'chrome' to base url 'https://staging.pay-lo.com/backoffice/signin'.</msg>
-<status status="PASS" starttime="20200601 18:29:54.349" endtime="20200601 18:29:59.687"></status>
-</kw>
-<kw name="Maximize Browser Window" library="SeleniumLibrary">
-<doc>Maximizes current browser window.</doc>
-<status status="PASS" starttime="20200601 18:29:59.688" endtime="20200601 18:30:00.323"></status>
-</kw>
-<kw name="Set Selenium Speed" library="SeleniumLibrary">
-<doc>Sets the delay that is waited after each Selenium command.</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
 <arguments>
-<arg>0.5</arg>
+<arg>get merchant</arg>
+<arg>${api-staging}</arg>
+<arg>disable_warnings=1</arg>
 </arguments>
-<status status="PASS" starttime="20200601 18:30:00.324" endtime="20200601 18:30:00.324"></status>
+<msg timestamp="20200605 10:15:47.784" level="INFO">Creating Session using : alias=get merchant, url=https://staging-api-manage.pay-lo.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20200605 10:15:47.785" starttime="20200605 10:15:47.783"></status>
 </kw>
-<status status="PASS" starttime="20200601 18:29:54.349" endtime="20200601 18:30:00.325"></status>
-</kw>
-<kw name="Backoffice login" library="Keyword_login">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
 <arguments>
-<arg>${backoffice-email}</arg>
-<arg>${backoffice-pass}</arg>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${admin-token}</arg>
+<arg>page=1</arg>
+<arg>perpage=1</arg>
+<arg>status=1</arg>
 </arguments>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200605 10:15:47.787" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTE2ODM3OTIsImlhdCI6MTU5MTA3ODk5Mn0.etU...</msg>
+<status status="PASS" endtime="20200605 10:15:47.787" starttime="20200605 10:15:47.786"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
 <arguments>
-<arg>${email-xpath}</arg>
-<arg>${backoffice-email}</arg>
+<arg>get merchant</arg>
+<arg>${api-get-merchant}</arg>
+<arg>headers=${headers}</arg>
 </arguments>
-<msg timestamp="20200601 18:30:00.327" level="INFO">Typing text 'paylobackoffice@gmail.com' into text field 'id=field-email'.</msg>
-<status status="PASS" starttime="20200601 18:30:00.326" endtime="20200601 18:30:02.178"></status>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200605 10:15:48.361" level="INFO">GET Request : url=https://staging-api-manage.pay-lo.com/admin/merchants 
+ path_url=/admin/merchants 
+ headers={'status': u'1', 'perpage': u'1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.23.0', 'Connection': 'keep-alive', 'Content-Type': u'application/json', 'page': u'1', 'Authorization': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTE2ODM3OTIsImlhdCI6MTU5MTA3ODk5Mn0.etUcVqt6WirnaOoUihMKl1_PPTZ4G3CIXlNdP96tlaU'} 
+ body=None 
+ </msg>
+<msg timestamp="20200605 10:15:48.362" level="INFO">GET Response : url=https://staging-api-manage.pay-lo.com/admin/merchants 
+ status=200, reason=OK 
+ body={"data":[{"id":"5ed9b8e38a3a7f001b008b7e","name":"Test","company_name":"BOND","email":"nathakrit.p+9@gmail.com","phone":"0998887777","address":"Mars","business_type":"Hotel","product_type":"Room","contact_email":"success register merchant.","status_activity":{"status":"pending","date":1591326947493},"status":"pending","balance":0,"created_at":1591326947497,"total_activity":0},{"id":"5ed10e268d2417001bacde7d","name":"Marius","company_name":"Test Marius","email":"mail@20scoops.com","phone":"123456789","address":"mm@20scoops.com","business_type":"FUN","contact_email":"mm@20it.de","status_activity":{"status":"approved","date":1591286829490},"status":"approved","balance":0,"created_at":1590758950485,"total_activity":0},{"id":"5ed0a8c48d2417001bacde6c","name":"Jakcie3","company_name":"Mii","email":"sniperaek+00@gmail.com","phone":"800-228-9290 ","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Room Service","product_type":"Kitchen staff","contact_email":"sniperaek+00@gmail.com","status_activity":{"status":"approved","date":1590733027987},"status":"approved","balance":0,"currency":"EUR","bank_account":"GB33 BUKB 2020 1555 5555 55","vat_number":"DE123456789","created_at":1590732996304,"total_activity":0},{"id":"5ecf80c3e8777f001b0e70c2","name":"Sat","company_name":"1111","email":"nathakrit.p@gmail.com","phone":"0998887777","address":"Mars","business_type":"Hotel","product_type":"Room","contact_email":"nathakrit.p@gmail.com","status_activity":{"status":"approved","date":1590657266579},"status":"approved","balance":595,"currency":"EUR","bank_account":"DE91 1000 0000 0123 4567 89","vat_number":"DE 123456789","created_at":1590657219449,"total_activity":14},{"id":"5ecce07ae8777f001b0e70a6","name":"Willem111","company_name":"Stoltenberg Group","email":"sniperaek+7@gmail.com","phone":"1231231231","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Room Service","product_type":"Premium","contact_email":"sniperaek+7@gmail.com","status_activity":{"status":"approved","date":1590485181412},"status":"approved","balance":0,"currency":"EUR","bank_account":"DE75 5121 0800 1245 1261 99","vat_number":"DE123456789","created_at":1590485114265,"total_activity":0},{"id":"5ecbe493e8777f001b0e7093","name":"Maron1","company_name":"Ondricka, Macejkovic and Collier","email":"sniperaek+6@gmail.com","phone":"59-1429060","address":"Matrix Next-Generation Channels\t","business_type":"Hotel","product_type":"Premium","contact_email":"sniperaek+6@gmail.com","status_activity":{"status":"approved","date":1590485031089},"status":"approved","balance":0,"currency":"EUR","bank_account":"DE75 5121 0800 1245 1261 99","vat_number":"dsfsdxzfds","created_at":1590420627382,"total_activity":0},{"id":"5ecbe2d1e8777f001b0e7090","name":"Echo","company_name":"Pfannerstill, Bernhard and Carter\t","email":"sniperaek+5@gmail.com","phone":"954488122","address":"Front-Line Mobile Circuit\t","business_type":"Car","product_type":"BMW","contact_email":"sniperaek+5@gmail.com","status_activity":{"status":"approved","date":1590420467677},"status":"approved","balance":0,"created_at":1590420177645,"total_activity":0},{"id":"5ecbe0e0e8777f001b0e708b","name":"Jims","company_name":"Olson, Yundt and Ankunding\t","email":"sniperaek+4@gmail.com","phone":"83-1489512","address":"Front-Line Mobile Circuit\t","business_type":"Hotel","product_type":"","contact_email":"sniperaek+2@gmail.com","status_activity":{"status":"approved","date":1590419747189},"status":"approved","balance":0,"currency":"EUR","bank_account":"GB33 BUKB 2020 1555 5555 55","vat_number":"111","created_at":1590419680069,"total_activity":0},{"id":"5e95ad15821b80001b13be0f","company_name":"Hotel Sea View","email":"billing@hotel-sea-view.com","phone":"001-000-123456789","address":"12344, Ocean Drive, Pasadena, 99123, CA","business_type":"Hotel","product_type":"Boutique","contact_email":"menzelmichael@t-online.de","status_activity":{"status":"approved","date":1586867500428},"status":"approved","balance":0,"created_at":1586867477285,"total_activity":0},{"id":"5e95a4f3821b80001b13be0c","company_name":"Hotel Sea View","email":"billing@hotel-sea-hotel.com","phone":"001-000-123456789","address":"12344, Ocean Drive, Pasadena, 99123, CA","business_type":"Hotel","product_type":"Boutique","contact_email":"menzelmichael@t-online.de","status_activity":{"status":"approved","date":1586865713547},"status":"approved","balance":0,"created_at":1586865395092,"total_activity":0},{"id":"5e95946b821b80001b13be0a","company_name":"Skynet","email":"david.s@20scoops.net","phone":"0947106780","address":"Mars, Cyber District","business_type":"Robotics","product_type":"Terminator","contact_email":"david.s@20scoops.net","status_activity":{"status":"approved","date":1586861237308},"status":"approved","balance":0,"created_at":1586861163938,"total_activity":0},{"id":"5e955db4821b80001b13be04","name":"O'Reilly","company_name":"O'Reilly","email":"sniperaek+103@gmail.com","phone":"800-228-9290","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Room Service","product_type":"Kitchen staffw","contact_email":"muenchen.marriott@marriotthotels.com","status_activity":{"status":"approved","date":1586847182907},"status":"approved","balance":0,"created_at":1586847156372,"total_activity":0},{"id":"5e952591821b80001b13bdf5","name":"Quitzon Inc1","company_name":"Quitzon Inc1","email":"sniperaek+101@gmail.com","phone":"47-9286747","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Hotel","product_type":"Premium","contact_email":"sniperaek+101@gmail.com","status_activity":{"status":"approved","date":1586832847544},"status":"approved","balance":0,"created_at":1586832785890,"total_activity":0},{"id":"5e9524bd821b80001b13bdf4","company_name":"Trantow-Predovic","email":"sniperaek+100@gmail.com","phone":"90-7096454","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Hotel","product_type":"Kitchen staff","contact_email":"sniperaek+100@gmail.com","status_activity":{"status":"rejected","date":1586832693921},"status":"rejected","balance":0,"created_at":1586832573637,"total_activity":0},{"id":"5e8c9b4bd81977001b1634d5","name":"Hotel One","company_name":"Hotel One","email":"menzelmichael0107@gmail.com","phone":"+491736078484","address":"Mauststrasse 1, 88990 Hierstadt","business_type":"Hotel","product_type":"","contact_email":"menzelmichael0107@gmail.com","status_activity":{"status":"approved","date":1586334913184},"status":"approved","balance":0,"created_at":1586273099208,"total_activity":0}],"pagination":{"total":45,"total_pages":3,"current_page":1,"perpage":15}} 
+ </msg>
+<msg timestamp="20200605 10:15:48.362" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20200605 10:15:48.362" starttime="20200605 10:15:47.787"></status>
 </kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
 <arguments>
-<arg>${continue-btn}</arg>
+<arg>${resp.status_code}</arg>
+<arg>${status}</arg>
 </arguments>
-<msg timestamp="20200601 18:30:02.179" level="INFO">Clicking element 'id=signin-button'.</msg>
-<status status="PASS" starttime="20200601 18:30:02.179" endtime="20200601 18:30:03.254"></status>
+<status status="PASS" endtime="20200605 10:15:48.363" starttime="20200605 10:15:48.363"></status>
 </kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
+<kw name="Get Json Value" library="HttpLibrary.HTTP">
+<doc>Get the target node of the JSON document `json_string` specified by `json_pointer`.</doc>
 <arguments>
-<arg>2s</arg>
+<arg>${resp.text}</arg>
+<arg>/data/0/id</arg>
 </arguments>
-<msg timestamp="20200601 18:30:05.257" level="INFO">Slept 2 seconds</msg>
-<status status="PASS" starttime="20200601 18:30:03.254" endtime="20200601 18:30:05.257"></status>
+<assign>
+<var>${merchant_id}</var>
+</assign>
+<msg timestamp="20200605 10:15:48.365" level="INFO">${merchant_id} = "5ed9b8e38a3a7f001b008b7e"</msg>
+<status status="PASS" endtime="20200605 10:15:48.365" starttime="20200605 10:15:48.364"></status>
 </kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<kw name="Remove String Using Regexp" library="String">
+<doc>Removes ``patterns`` from the given ``string``.</doc>
 <arguments>
-<arg>${password-xpath}</arg>
-<arg>${backoffice-pass}</arg>
+<arg>${merchant_id}</arg>
+<arg>"</arg>
 </arguments>
-<msg timestamp="20200601 18:30:05.258" level="INFO">Typing text '20Scoops#' into text field 'id=field-password'.</msg>
-<status status="PASS" starttime="20200601 18:30:05.258" endtime="20200601 18:30:06.929"></status>
+<assign>
+<var>${merchant_id}</var>
+</assign>
+<msg timestamp="20200605 10:15:48.366" level="INFO">${merchant_id} = 5ed9b8e38a3a7f001b008b7e</msg>
+<status status="PASS" endtime="20200605 10:15:48.366" starttime="20200605 10:15:48.365"></status>
 </kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
 <arguments>
-<arg>${login-btn}</arg>
+<arg>reject</arg>
+<arg>${api-staging}</arg>
+<arg>disable_warnings=1</arg>
 </arguments>
-<msg timestamp="20200601 18:30:06.930" level="INFO">Clicking element '//*[@class="MuiButton-label"]/span'.</msg>
-<status status="PASS" starttime="20200601 18:30:06.929" endtime="20200601 18:30:08.012"></status>
+<msg timestamp="20200605 10:15:48.367" level="INFO">Creating Session using : alias=reject, url=https://staging-api-manage.pay-lo.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20200605 10:15:48.367" starttime="20200605 10:15:48.366"></status>
 </kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
 <arguments>
-<arg>2s</arg>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${admin-token}</arg>
+<arg>id=${merchant_id}</arg>
 </arguments>
-<msg timestamp="20200601 18:30:10.013" level="INFO">Slept 2 seconds</msg>
-<status status="PASS" starttime="20200601 18:30:08.013" endtime="20200601 18:30:10.014"></status>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200605 10:15:48.368" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTE2ODM3OTIsImlhdCI6MTU5MTA3ODk5Mn0.etU...</msg>
+<status status="PASS" endtime="20200605 10:15:48.368" starttime="20200605 10:15:48.368"></status>
 </kw>
-<status status="PASS" starttime="20200601 18:30:00.325" endtime="20200601 18:30:10.014"></status>
-</kw>
-<kw name="Verify backoffice login success" library="Keyword_login">
+<kw name="Put Request" library="RequestsLibrary">
+<doc>Send a PUT request on the session object found using the</doc>
 <arguments>
-<arg>${backoffice-name}</arg>
+<arg>reject</arg>
+<arg>/admin/merchants/${merchant_id}/reject</arg>
+<arg>headers=${headers}</arg>
 </arguments>
-<kw name="Element Should Contain" library="SeleniumLibrary">
-<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200605 10:15:48.963" level="INFO">PUT Request : url=https://staging-api-manage.pay-lo.com/admin/merchants/5ed9b8e38a3a7f001b008b7e/reject 
+ path_url=/admin/merchants/5ed9b8e38a3a7f001b008b7e/reject 
+ headers={'Content-Length': '0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.23.0', 'Connection': 'keep-alive', 'Content-Type': u'application/json', 'id': u'5ed9b8e38a3a7f001b008b7e', 'Authorization': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTE2ODM3OTIsImlhdCI6MTU5MTA3ODk5Mn0.etUcVqt6WirnaOoUihMKl1_PPTZ4G3CIXlNdP96tlaU'} 
+ body=None 
+ </msg>
+<msg timestamp="20200605 10:15:48.963" level="INFO">PUT Response : url=https://staging-api-manage.pay-lo.com/admin/merchants/5ed9b8e38a3a7f001b008b7e/reject 
+ status=200, reason=OK 
+ body={"message":"success update status."} 
+ </msg>
+<msg timestamp="20200605 10:15:48.963" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20200605 10:15:48.963" starttime="20200605 10:15:48.369"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
 <arguments>
-<arg>${verify-backoffice-login}</arg>
-<arg>${backoffice-name}</arg>
+<arg>${resp.status_code}</arg>
+<arg>${status}</arg>
 </arguments>
-<msg timestamp="20200601 18:30:11.047" level="INFO">Element '//*[@id="root"]/main/div[1]/aside/div[2]/div/div/div[2]/div/div[2]/h5' contains text 'Paylo Backoffice'.</msg>
-<status status="PASS" starttime="20200601 18:30:10.016" endtime="20200601 18:30:11.047"></status>
+<status status="PASS" endtime="20200605 10:15:48.964" starttime="20200605 10:15:48.964"></status>
 </kw>
-<status status="PASS" starttime="20200601 18:30:10.015" endtime="20200601 18:30:11.047"></status>
+<status status="PASS" endtime="20200605 10:15:48.965" starttime="20200605 10:15:47.782"></status>
 </kw>
-<kw name="Approve merchant" library="Keyword_login">
-<arguments>
-<arg>${modal-header-text}</arg>
-</arguments>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${merchant-menu}</arg>
-</arguments>
-<msg timestamp="20200601 18:30:11.049" level="INFO">Clicking element '//*[@id="merchants-link"]/span'.</msg>
-<status status="PASS" starttime="20200601 18:30:11.048" endtime="20200601 18:30:12.194"></status>
-</kw>
-<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
-<doc>Waits until the element ``locator`` is visible.</doc>
-<arguments>
-<arg>${approve-btn}</arg>
-</arguments>
-<status status="PASS" starttime="20200601 18:30:12.195" endtime="20200601 18:30:13.942"></status>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${approve-btn}</arg>
-</arguments>
-<msg timestamp="20200601 18:30:13.943" level="INFO">Clicking element '//*[@class="indexview__ApproveButton-f6kizg-13 kwXILV"]'.</msg>
-<status status="PASS" starttime="20200601 18:30:13.943" endtime="20200601 18:30:14.995"></status>
-</kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>5s</arg>
-</arguments>
-<msg timestamp="20200601 18:30:19.997" level="INFO">Slept 5 seconds</msg>
-<status status="PASS" starttime="20200601 18:30:14.996" endtime="20200601 18:30:19.997"></status>
-</kw>
-<kw name="Element Should Contain" library="SeleniumLibrary">
-<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
-<arguments>
-<arg>${verify-modal}</arg>
-<arg>${modal-header-text}</arg>
-</arguments>
-<msg timestamp="20200601 18:30:21.028" level="INFO">Element '//*[@class="MuiDialogTitle-root indexview__PlTitleDialog-sc-16lqnlh-1 fdOaPR"]/div/div' contains text 'Confirm Approval'.</msg>
-<status status="PASS" starttime="20200601 18:30:19.997" endtime="20200601 18:30:21.028"></status>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${confirm-btn}</arg>
-</arguments>
-<msg timestamp="20200601 18:30:21.029" level="INFO">Clicking element '//*[@class="MuiDialogContent-root indexview__PlDialogContent-sc-16lqnlh-3 goCyEE MuiDialogContent-dividers"]/div[3]/button[2]'.</msg>
-<status status="PASS" starttime="20200601 18:30:21.028" endtime="20200601 18:30:22.115"></status>
-</kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>3s</arg>
-</arguments>
-<msg timestamp="20200601 18:30:25.117" level="INFO">Slept 3 seconds</msg>
-<status status="PASS" starttime="20200601 18:30:22.116" endtime="20200601 18:30:25.117"></status>
-</kw>
-<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
-<doc>Waits until the element ``locator`` is visible.</doc>
-<arguments>
-<arg>${verify-approve}</arg>
-</arguments>
-<status status="PASS" starttime="20200601 18:30:25.118" endtime="20200601 18:30:26.148"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:30:11.048" endtime="20200601 18:30:26.148"></status>
-</kw>
-<kw name="Verify approve success" library="Keyword_login">
-<arguments>
-<arg>${status-approved}</arg>
-</arguments>
-<kw name="Element Should Contain" library="SeleniumLibrary">
-<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
-<arguments>
-<arg>${verify-approve}</arg>
-<arg>${status-approved}</arg>
-</arguments>
-<msg timestamp="20200601 18:30:27.178" level="INFO">Element '//*[@id="activities-table"]/tbody/tr[2]/td[2]/div/span' contains text 'Approved'.</msg>
-<status status="PASS" starttime="20200601 18:30:26.149" endtime="20200601 18:30:27.178"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:30:26.149" endtime="20200601 18:30:27.179"></status>
-</kw>
-<kw name="Close All Browsers" library="SeleniumLibrary" type="teardown">
-<doc>Closes all open browsers and resets the browser cache.</doc>
-<status status="PASS" starttime="20200601 18:30:27.180" endtime="20200601 18:30:27.754"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:29:54.347" endtime="20200601 18:30:27.754" critical="yes"></status>
+<status status="PASS" endtime="20200605 10:15:48.965" critical="yes" starttime="20200605 10:15:47.781"></status>
 </test>
-<test id="s1-t3" name="TC03 : Merchant login with valid account successful.">
-<kw name="Open merchant browser" library="Keyword_login">
-<kw name="Open Browser" library="SeleniumLibrary">
-<doc>Opens a new browser instance to the optional ``url``.</doc>
+<test id="s1-t3" name="TC03 : Backoffice can approve merchant.">
+<kw name="Get merchant registered ID and approve" library="Keyword_api_backoffice">
 <arguments>
-<arg>${merchant_url}</arg>
-<arg>chrome</arg>
+<arg>200</arg>
 </arguments>
-<msg timestamp="20200601 18:30:27.757" level="INFO">Opening browser 'chrome' to base url 'https://staging.pay-lo.com/merchant/signin'.</msg>
-<status status="PASS" starttime="20200601 18:30:27.757" endtime="20200601 18:30:34.145"></status>
-</kw>
-<kw name="Maximize Browser Window" library="SeleniumLibrary">
-<doc>Maximizes current browser window.</doc>
-<status status="PASS" starttime="20200601 18:30:34.146" endtime="20200601 18:30:34.788"></status>
-</kw>
-<kw name="Set Selenium Speed" library="SeleniumLibrary">
-<doc>Sets the delay that is waited after each Selenium command.</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
 <arguments>
-<arg>0.5</arg>
+<arg>get merchant</arg>
+<arg>${api-staging}</arg>
+<arg>disable_warnings=1</arg>
 </arguments>
-<status status="PASS" starttime="20200601 18:30:34.788" endtime="20200601 18:30:34.788"></status>
+<msg timestamp="20200605 10:15:48.971" level="INFO">Creating Session using : alias=get merchant, url=https://staging-api-manage.pay-lo.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20200605 10:15:48.971" starttime="20200605 10:15:48.970"></status>
 </kw>
-<status status="PASS" starttime="20200601 18:30:27.756" endtime="20200601 18:30:34.789"></status>
-</kw>
-<kw name="Merchant login after admin approved account" library="Keyword_login">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
 <arguments>
-<arg>np@gmail.com</arg>
-<arg>${password}</arg>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${admin-token}</arg>
+<arg>page=1</arg>
+<arg>perpage=1</arg>
+<arg>status=1</arg>
 </arguments>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200605 10:15:48.973" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTE2ODM3OTIsImlhdCI6MTU5MTA3ODk5Mn0.etU...</msg>
+<status status="PASS" endtime="20200605 10:15:48.973" starttime="20200605 10:15:48.972"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
 <arguments>
-<arg>${email-xpath}</arg>
-<arg>${email}</arg>
+<arg>get merchant</arg>
+<arg>${api-get-merchant}</arg>
+<arg>headers=${headers}</arg>
 </arguments>
-<msg timestamp="20200601 18:30:34.790" level="INFO">Typing text 'np@gmail.com' into text field 'id=field-email'.</msg>
-<status status="PASS" starttime="20200601 18:30:34.790" endtime="20200601 18:30:36.535"></status>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200605 10:15:49.307" level="INFO">GET Request : url=https://staging-api-manage.pay-lo.com/admin/merchants 
+ path_url=/admin/merchants 
+ headers={'status': u'1', 'perpage': u'1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.23.0', 'Connection': 'keep-alive', 'Content-Type': u'application/json', 'page': u'1', 'Authorization': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTE2ODM3OTIsImlhdCI6MTU5MTA3ODk5Mn0.etUcVqt6WirnaOoUihMKl1_PPTZ4G3CIXlNdP96tlaU'} 
+ body=None 
+ </msg>
+<msg timestamp="20200605 10:15:49.308" level="INFO">GET Response : url=https://staging-api-manage.pay-lo.com/admin/merchants 
+ status=200, reason=OK 
+ body={"data":[{"id":"5ed9b8e38a3a7f001b008b7e","name":"Test","company_name":"BOND","email":"nathakrit.p+9@gmail.com","phone":"0998887777","address":"Mars","business_type":"Hotel","product_type":"Room","contact_email":"success register merchant.","status_activity":{"status":"rejected","date":1591326948764},"status":"rejected","balance":0,"created_at":1591326947497,"total_activity":0},{"id":"5ed10e268d2417001bacde7d","name":"Marius","company_name":"Test Marius","email":"mail@20scoops.com","phone":"123456789","address":"mm@20scoops.com","business_type":"FUN","contact_email":"mm@20it.de","status_activity":{"status":"approved","date":1591286829490},"status":"approved","balance":0,"created_at":1590758950485,"total_activity":0},{"id":"5ed0a8c48d2417001bacde6c","name":"Jakcie3","company_name":"Mii","email":"sniperaek+00@gmail.com","phone":"800-228-9290 ","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Room Service","product_type":"Kitchen staff","contact_email":"sniperaek+00@gmail.com","status_activity":{"status":"approved","date":1590733027987},"status":"approved","balance":0,"currency":"EUR","bank_account":"GB33 BUKB 2020 1555 5555 55","vat_number":"DE123456789","created_at":1590732996304,"total_activity":0},{"id":"5ecf80c3e8777f001b0e70c2","name":"Sat","company_name":"1111","email":"nathakrit.p@gmail.com","phone":"0998887777","address":"Mars","business_type":"Hotel","product_type":"Room","contact_email":"nathakrit.p@gmail.com","status_activity":{"status":"approved","date":1590657266579},"status":"approved","balance":595,"currency":"EUR","bank_account":"DE91 1000 0000 0123 4567 89","vat_number":"DE 123456789","created_at":1590657219449,"total_activity":14},{"id":"5ecce07ae8777f001b0e70a6","name":"Willem111","company_name":"Stoltenberg Group","email":"sniperaek+7@gmail.com","phone":"1231231231","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Room Service","product_type":"Premium","contact_email":"sniperaek+7@gmail.com","status_activity":{"status":"approved","date":1590485181412},"status":"approved","balance":0,"currency":"EUR","bank_account":"DE75 5121 0800 1245 1261 99","vat_number":"DE123456789","created_at":1590485114265,"total_activity":0},{"id":"5ecbe493e8777f001b0e7093","name":"Maron1","company_name":"Ondricka, Macejkovic and Collier","email":"sniperaek+6@gmail.com","phone":"59-1429060","address":"Matrix Next-Generation Channels\t","business_type":"Hotel","product_type":"Premium","contact_email":"sniperaek+6@gmail.com","status_activity":{"status":"approved","date":1590485031089},"status":"approved","balance":0,"currency":"EUR","bank_account":"DE75 5121 0800 1245 1261 99","vat_number":"dsfsdxzfds","created_at":1590420627382,"total_activity":0},{"id":"5ecbe2d1e8777f001b0e7090","name":"Echo","company_name":"Pfannerstill, Bernhard and Carter\t","email":"sniperaek+5@gmail.com","phone":"954488122","address":"Front-Line Mobile Circuit\t","business_type":"Car","product_type":"BMW","contact_email":"sniperaek+5@gmail.com","status_activity":{"status":"approved","date":1590420467677},"status":"approved","balance":0,"created_at":1590420177645,"total_activity":0},{"id":"5ecbe0e0e8777f001b0e708b","name":"Jims","company_name":"Olson, Yundt and Ankunding\t","email":"sniperaek+4@gmail.com","phone":"83-1489512","address":"Front-Line Mobile Circuit\t","business_type":"Hotel","product_type":"","contact_email":"sniperaek+2@gmail.com","status_activity":{"status":"approved","date":1590419747189},"status":"approved","balance":0,"currency":"EUR","bank_account":"GB33 BUKB 2020 1555 5555 55","vat_number":"111","created_at":1590419680069,"total_activity":0},{"id":"5e95ad15821b80001b13be0f","company_name":"Hotel Sea View","email":"billing@hotel-sea-view.com","phone":"001-000-123456789","address":"12344, Ocean Drive, Pasadena, 99123, CA","business_type":"Hotel","product_type":"Boutique","contact_email":"menzelmichael@t-online.de","status_activity":{"status":"approved","date":1586867500428},"status":"approved","balance":0,"created_at":1586867477285,"total_activity":0},{"id":"5e95a4f3821b80001b13be0c","company_name":"Hotel Sea View","email":"billing@hotel-sea-hotel.com","phone":"001-000-123456789","address":"12344, Ocean Drive, Pasadena, 99123, CA","business_type":"Hotel","product_type":"Boutique","contact_email":"menzelmichael@t-online.de","status_activity":{"status":"approved","date":1586865713547},"status":"approved","balance":0,"created_at":1586865395092,"total_activity":0},{"id":"5e95946b821b80001b13be0a","company_name":"Skynet","email":"david.s@20scoops.net","phone":"0947106780","address":"Mars, Cyber District","business_type":"Robotics","product_type":"Terminator","contact_email":"david.s@20scoops.net","status_activity":{"status":"approved","date":1586861237308},"status":"approved","balance":0,"created_at":1586861163938,"total_activity":0},{"id":"5e955db4821b80001b13be04","name":"O'Reilly","company_name":"O'Reilly","email":"sniperaek+103@gmail.com","phone":"800-228-9290","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Room Service","product_type":"Kitchen staffw","contact_email":"muenchen.marriott@marriotthotels.com","status_activity":{"status":"approved","date":1586847182907},"status":"approved","balance":0,"created_at":1586847156372,"total_activity":0},{"id":"5e952591821b80001b13bdf5","name":"Quitzon Inc1","company_name":"Quitzon Inc1","email":"sniperaek+101@gmail.com","phone":"47-9286747","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Hotel","product_type":"Premium","contact_email":"sniperaek+101@gmail.com","status_activity":{"status":"approved","date":1586832847544},"status":"approved","balance":0,"created_at":1586832785890,"total_activity":0},{"id":"5e9524bd821b80001b13bdf4","company_name":"Trantow-Predovic","email":"sniperaek+100@gmail.com","phone":"90-7096454","address":"Mueang Chiang Mai District, Chiang Mai","business_type":"Hotel","product_type":"Kitchen staff","contact_email":"sniperaek+100@gmail.com","status_activity":{"status":"rejected","date":1586832693921},"status":"rejected","balance":0,"created_at":1586832573637,"total_activity":0},{"id":"5e8c9b4bd81977001b1634d5","name":"Hotel One","company_name":"Hotel One","email":"menzelmichael0107@gmail.com","phone":"+491736078484","address":"Mauststrasse 1, 88990 Hierstadt","business_type":"Hotel","product_type":"","contact_email":"menzelmichael0107@gmail.com","status_activity":{"status":"approved","date":1586334913184},"status":"approved","balance":0,"created_at":1586273099208,"total_activity":0}],"pagination":{"total":45,"total_pages":3,"current_page":1,"perpage":15}} 
+ </msg>
+<msg timestamp="20200605 10:15:49.308" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20200605 10:15:49.308" starttime="20200605 10:15:48.973"></status>
 </kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
 <arguments>
-<arg>${continue-btn}</arg>
+<arg>${resp.status_code}</arg>
+<arg>${status}</arg>
 </arguments>
-<msg timestamp="20200601 18:30:36.536" level="INFO">Clicking element 'id=signin-button'.</msg>
-<status status="PASS" starttime="20200601 18:30:36.536" endtime="20200601 18:30:37.599"></status>
+<status status="PASS" endtime="20200605 10:15:49.310" starttime="20200605 10:15:49.309"></status>
 </kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
+<kw name="Get Json Value" library="HttpLibrary.HTTP">
+<doc>Get the target node of the JSON document `json_string` specified by `json_pointer`.</doc>
 <arguments>
-<arg>5s</arg>
+<arg>${resp.text}</arg>
+<arg>/data/0/id</arg>
 </arguments>
-<msg timestamp="20200601 18:30:42.600" level="INFO">Slept 5 seconds</msg>
-<status status="PASS" starttime="20200601 18:30:37.599" endtime="20200601 18:30:42.601"></status>
+<assign>
+<var>${merchant_id}</var>
+</assign>
+<msg timestamp="20200605 10:15:49.311" level="INFO">${merchant_id} = "5ed9b8e38a3a7f001b008b7e"</msg>
+<status status="PASS" endtime="20200605 10:15:49.311" starttime="20200605 10:15:49.310"></status>
 </kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<kw name="Remove String Using Regexp" library="String">
+<doc>Removes ``patterns`` from the given ``string``.</doc>
 <arguments>
-<arg>${password-xpath}</arg>
-<arg>${password}</arg>
+<arg>${merchant_id}</arg>
+<arg>"</arg>
 </arguments>
-<msg timestamp="20200601 18:30:42.601" level="INFO">Typing text 'Bb$1234567890' into text field 'id=field-password'.</msg>
-<status status="PASS" starttime="20200601 18:30:42.601" endtime="20200601 18:30:44.300"></status>
+<assign>
+<var>${merchant_id}</var>
+</assign>
+<msg timestamp="20200605 10:15:49.312" level="INFO">${merchant_id} = 5ed9b8e38a3a7f001b008b7e</msg>
+<status status="PASS" endtime="20200605 10:15:49.312" starttime="20200605 10:15:49.311"></status>
 </kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
 <arguments>
-<arg>${login-btn}</arg>
+<arg>approve</arg>
+<arg>${api-staging}</arg>
+<arg>disable_warnings=1</arg>
 </arguments>
-<msg timestamp="20200601 18:30:44.301" level="INFO">Clicking element '//*[@class="MuiButton-label"]/span'.</msg>
-<status status="PASS" starttime="20200601 18:30:44.301" endtime="20200601 18:30:45.376"></status>
+<msg timestamp="20200605 10:15:49.313" level="INFO">Creating Session using : alias=approve, url=https://staging-api-manage.pay-lo.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20200605 10:15:49.313" starttime="20200605 10:15:49.312"></status>
 </kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
 <arguments>
-<arg>5s</arg>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${admin-token}</arg>
+<arg>id=${merchant_id}</arg>
 </arguments>
-<msg timestamp="20200601 18:30:50.378" level="INFO">Slept 5 seconds</msg>
-<status status="PASS" starttime="20200601 18:30:45.376" endtime="20200601 18:30:50.378"></status>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200605 10:15:49.314" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTE2ODM3OTIsImlhdCI6MTU5MTA3ODk5Mn0.etU...</msg>
+<status status="PASS" endtime="20200605 10:15:49.314" starttime="20200605 10:15:49.314"></status>
 </kw>
-<status status="PASS" starttime="20200601 18:30:34.789" endtime="20200601 18:30:50.378"></status>
-</kw>
-<kw name="Verify login success" library="Keyword_login">
+<kw name="Put Request" library="RequestsLibrary">
+<doc>Send a PUT request on the session object found using the</doc>
 <arguments>
-<arg>${contactPerson}</arg>
+<arg>approve</arg>
+<arg>/admin/merchants/${merchant_id}/approve</arg>
+<arg>headers=${headers}</arg>
 </arguments>
-<kw name="Element Should Contain" library="SeleniumLibrary">
-<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200605 10:15:49.890" level="INFO">PUT Request : url=https://staging-api-manage.pay-lo.com/admin/merchants/5ed9b8e38a3a7f001b008b7e/approve 
+ path_url=/admin/merchants/5ed9b8e38a3a7f001b008b7e/approve 
+ headers={'Content-Length': '0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.23.0', 'Connection': 'keep-alive', 'Content-Type': u'application/json', 'id': u'5ed9b8e38a3a7f001b008b7e', 'Authorization': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTE2ODM3OTIsImlhdCI6MTU5MTA3ODk5Mn0.etUcVqt6WirnaOoUihMKl1_PPTZ4G3CIXlNdP96tlaU'} 
+ body=None 
+ </msg>
+<msg timestamp="20200605 10:15:49.890" level="INFO">PUT Response : url=https://staging-api-manage.pay-lo.com/admin/merchants/5ed9b8e38a3a7f001b008b7e/approve 
+ status=200, reason=OK 
+ body={"message":"success update status."} 
+ </msg>
+<msg timestamp="20200605 10:15:49.891" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20200605 10:15:49.891" starttime="20200605 10:15:49.315"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
 <arguments>
-<arg>${verify-login-success}</arg>
-<arg>${merchant-name}</arg>
+<arg>${resp.status_code}</arg>
+<arg>${status}</arg>
 </arguments>
-<msg timestamp="20200601 18:30:51.414" level="INFO">Element '//*[@class="indexview__Detail-eq3sj0-4 lofCqk"]/h5' contains text 'Tom'.</msg>
-<status status="PASS" starttime="20200601 18:30:50.381" endtime="20200601 18:30:51.415"></status>
+<status status="PASS" endtime="20200605 10:15:49.892" starttime="20200605 10:15:49.891"></status>
 </kw>
-<status status="PASS" starttime="20200601 18:30:50.379" endtime="20200601 18:30:51.415"></status>
+<status status="PASS" endtime="20200605 10:15:49.892" starttime="20200605 10:15:48.967"></status>
 </kw>
-<kw name="Verify toast update payment is appear" library="Keyword_verify_info">
-<kw name="Element Should Contain" library="SeleniumLibrary">
-<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
-<arguments>
-<arg>${toast-alert}</arg>
-<arg>Payment Information</arg>
-</arguments>
-<msg timestamp="20200601 18:30:52.447" level="INFO">Element '//*[@class="MuiAlert-message"]/div/a' contains text 'Payment Information'.</msg>
-<status status="PASS" starttime="20200601 18:30:51.416" endtime="20200601 18:30:52.447"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:30:51.415" endtime="20200601 18:30:52.448"></status>
-</kw>
-<kw name="Close All Browsers" library="SeleniumLibrary" type="teardown">
-<doc>Closes all open browsers and resets the browser cache.</doc>
-<status status="PASS" starttime="20200601 18:30:52.448" endtime="20200601 18:30:53.017"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:30:27.755" endtime="20200601 18:30:53.017" critical="yes"></status>
+<status status="PASS" endtime="20200605 10:15:49.892" critical="yes" starttime="20200605 10:15:48.966"></status>
 </test>
-<test id="s1-t4" name="TC04 : Merchant need to update their payment information.">
-<kw name="Open merchant browser" library="Keyword_login">
-<kw name="Open Browser" library="SeleniumLibrary">
-<doc>Opens a new browser instance to the optional ``url``.</doc>
+<test id="s1-t4" name="TC04 : Merchant can be able to login.">
+<kw name="Go to Login Api and send value" library="Keyword_api_login">
 <arguments>
-<arg>${merchant_url}</arg>
-<arg>chrome</arg>
+<arg>200</arg>
 </arguments>
-<msg timestamp="20200601 18:30:53.020" level="INFO">Opening browser 'chrome' to base url 'https://staging.pay-lo.com/merchant/signin'.</msg>
-<status status="PASS" starttime="20200601 18:30:53.020" endtime="20200601 18:30:58.471"></status>
-</kw>
-<kw name="Maximize Browser Window" library="SeleniumLibrary">
-<doc>Maximizes current browser window.</doc>
-<status status="PASS" starttime="20200601 18:30:58.472" endtime="20200601 18:30:59.114"></status>
-</kw>
-<kw name="Set Selenium Speed" library="SeleniumLibrary">
-<doc>Sets the delay that is waited after each Selenium command.</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
 <arguments>
-<arg>0.5</arg>
+<arg>merchant_login</arg>
+<arg>${api-staging}</arg>
+<arg>disable_warnings=0</arg>
 </arguments>
-<status status="PASS" starttime="20200601 18:30:59.115" endtime="20200601 18:30:59.115"></status>
+<msg timestamp="20200605 10:15:49.895" level="INFO">Creating Session using : alias=merchant_login, url=https://staging-api-manage.pay-lo.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20200605 10:15:49.896" starttime="20200605 10:15:49.894"></status>
 </kw>
-<status status="PASS" starttime="20200601 18:30:53.019" endtime="20200601 18:30:59.115"></status>
-</kw>
-<kw name="Merchant login after admin approved account" library="Keyword_login">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
 <arguments>
-<arg>np@gmail.com</arg>
-<arg>${password}</arg>
+<arg>Content-Type=application/json</arg>
+<arg>charset=utf-8</arg>
 </arguments>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200605 10:15:49.897" level="INFO">&amp;{headers} = { Content-Type=application/json | charset=utf-8 }</msg>
+<status status="PASS" endtime="20200605 10:15:49.897" starttime="20200605 10:15:49.896"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
 <arguments>
-<arg>${email-xpath}</arg>
-<arg>${email}</arg>
+<arg>email=nathakrit.p+9@gmail.com</arg>
+<arg>password=Bb$1234567890</arg>
 </arguments>
-<msg timestamp="20200601 18:30:59.117" level="INFO">Typing text 'np@gmail.com' into text field 'id=field-email'.</msg>
-<status status="PASS" starttime="20200601 18:30:59.117" endtime="20200601 18:31:00.860"></status>
+<assign>
+<var>&amp;{data}</var>
+</assign>
+<msg timestamp="20200605 10:15:49.898" level="INFO">&amp;{data} = { email=nathakrit.p+9@gmail.com | password=Bb$1234567890 }</msg>
+<status status="PASS" endtime="20200605 10:15:49.898" starttime="20200605 10:15:49.897"></status>
 </kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
 <arguments>
-<arg>${continue-btn}</arg>
+<arg>merchant_login</arg>
+<arg>${api-merchant-login}</arg>
+<arg>data=${data}</arg>
+<arg>headers=${headers}</arg>
 </arguments>
-<msg timestamp="20200601 18:31:00.861" level="INFO">Clicking element 'id=signin-button'.</msg>
-<status status="PASS" starttime="20200601 18:31:00.861" endtime="20200601 18:31:01.945"></status>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200605 10:15:50.508" level="INFO">POST Request : url=https://staging-api-manage.pay-lo.com/merchants/login 
+ path_url=/merchants/login 
+ headers={'Content-Length': '65', 'Accept-Encoding': 'gzip, deflate', 'charset': u'utf-8', 'Accept': '*/*', 'User-Agent': 'python-requests/2.23.0', 'Connection': 'keep-alive', 'Content-Type': u'application/json'} 
+ body={"email": "nathakrit.p+9@gmail.com", "password": "Bb$1234567890"} 
+ </msg>
+<msg timestamp="20200605 10:15:50.508" level="INFO">POST Response : url=https://staging-api-manage.pay-lo.com/merchants/login 
+ status=200, reason=OK 
+ body={"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWQ5YjhlMzhhM2E3ZjAwMWIwMDhiN2UiLCJyb2xlIjoibWVyY2hhbnQiLCJ2IjoiNWVkOWI4ZTY4YTNhN2YwMDFiMDA4YjdmIiwiZXhwIjoxNTkxOTMxNzUwLCJpYXQiOjE1OTEzMjY5NTB9.iWfmoJuBUBlTvCziIp5FEEGD5KK2ndTqZAZoBZOqAOI"} 
+ </msg>
+<msg timestamp="20200605 10:15:50.508" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20200605 10:15:50.508" starttime="20200605 10:15:49.898"></status>
 </kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
 <arguments>
-<arg>5s</arg>
+<arg>${resp.status_code}</arg>
+<arg>${status}</arg>
 </arguments>
-<msg timestamp="20200601 18:31:06.947" level="INFO">Slept 5 seconds</msg>
-<status status="PASS" starttime="20200601 18:31:01.946" endtime="20200601 18:31:06.948"></status>
+<status status="PASS" endtime="20200605 10:15:50.509" starttime="20200605 10:15:50.509"></status>
 </kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${password-xpath}</arg>
-<arg>${password}</arg>
-</arguments>
-<msg timestamp="20200601 18:31:06.948" level="INFO">Typing text 'Bb$1234567890' into text field 'id=field-password'.</msg>
-<status status="PASS" starttime="20200601 18:31:06.948" endtime="20200601 18:31:08.648"></status>
+<status status="PASS" endtime="20200605 10:15:50.509" starttime="20200605 10:15:49.894"></status>
 </kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${login-btn}</arg>
-</arguments>
-<msg timestamp="20200601 18:31:08.649" level="INFO">Clicking element '//*[@class="MuiButton-label"]/span'.</msg>
-<status status="PASS" starttime="20200601 18:31:08.648" endtime="20200601 18:31:09.726"></status>
-</kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>5s</arg>
-</arguments>
-<msg timestamp="20200601 18:31:14.727" level="INFO">Slept 5 seconds</msg>
-<status status="PASS" starttime="20200601 18:31:09.726" endtime="20200601 18:31:14.728"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:30:59.116" endtime="20200601 18:31:14.728"></status>
-</kw>
-<kw name="Verify merchant information" library="Keyword_verify_info">
-<arguments>
-<arg>${companyName}</arg>
-<arg>${registeredAddress}</arg>
-<arg>${businessType}</arg>
-<arg>${contactPerson}</arg>
-</arguments>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${setting-xpath}</arg>
-</arguments>
-<msg timestamp="20200601 18:31:14.731" level="INFO">Clicking element '//*[@class="indexview__Wrapper-sc-1157pxf-0 foUBSv"]/div/ul/li[4]'.</msg>
-<status status="PASS" starttime="20200601 18:31:14.730" endtime="20200601 18:31:15.898"></status>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${profile-xpath}</arg>
-</arguments>
-<msg timestamp="20200601 18:31:15.898" level="INFO">Clicking element '//*[@class="SubLayout__Wrapper-tjbii-0 ebCdun"]/div/ul/li[1]'.</msg>
-<status status="PASS" starttime="20200601 18:31:15.898" endtime="20200601 18:31:16.998"></status>
-</kw>
-<kw name="Element Should Contain" library="SeleniumLibrary">
-<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
-<arguments>
-<arg>${profile-xpath}</arg>
-<arg>Profile</arg>
-</arguments>
-<msg timestamp="20200601 18:31:18.028" level="INFO">Element '//*[@class="SubLayout__Wrapper-tjbii-0 ebCdun"]/div/ul/li[1]' contains text 'Profile'.</msg>
-<status status="PASS" starttime="20200601 18:31:16.998" endtime="20200601 18:31:18.029"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:31:14.729" endtime="20200601 18:31:18.029"></status>
-</kw>
-<kw name="Edit information" library="Keyword_verify_info">
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${setting-xpath}</arg>
-</arguments>
-<msg timestamp="20200601 18:31:18.031" level="INFO">Clicking element '//*[@class="indexview__Wrapper-sc-1157pxf-0 foUBSv"]/div/ul/li[4]'.</msg>
-<status status="PASS" starttime="20200601 18:31:18.031" endtime="20200601 18:31:19.108"></status>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${field-companyName}</arg>
-</arguments>
-<msg timestamp="20200601 18:31:19.109" level="INFO">Clicking element 'id=field-companyName'.</msg>
-<status status="PASS" starttime="20200601 18:31:19.109" endtime="20200601 18:31:20.198"></status>
-</kw>
-<kw name="Press Keys" library="SeleniumLibrary">
-<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<arguments>
-<arg>${field-companyName}</arg>
-<arg>\\127</arg>
-</arguments>
-<msg timestamp="20200601 18:31:20.199" level="INFO">Sending key(s) ('\\127',) to id=field-companyName element.</msg>
-<msg timestamp="20200601 18:31:21.480" level="INFO">Sending keys \127</msg>
-<status status="PASS" starttime="20200601 18:31:20.199" endtime="20200601 18:31:22.032"></status>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${field-companyName}</arg>
-<arg>*Test update field*</arg>
-</arguments>
-<msg timestamp="20200601 18:31:22.033" level="INFO">Typing text '*Test update field*' into text field 'id=field-companyName'.</msg>
-<status status="PASS" starttime="20200601 18:31:22.032" endtime="20200601 18:31:23.845"></status>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${save-btn}</arg>
-</arguments>
-<msg timestamp="20200601 18:31:23.846" level="INFO">Clicking element '//*[@class="MuiButton-label"]/span'.</msg>
-<status status="PASS" starttime="20200601 18:31:23.846" endtime="20200601 18:31:24.934"></status>
-</kw>
-<kw name="Element Should Be Visible" library="SeleniumLibrary">
-<doc>Verifies that the element identified by ``locator`` is visible.</doc>
-<arguments>
-<arg>${toast-edit-success}</arg>
-<arg>Success!</arg>
-</arguments>
-<msg timestamp="20200601 18:31:25.965" level="INFO">Element '//*[@class="MuiAlert-message"]/div' is displayed.</msg>
-<status status="PASS" starttime="20200601 18:31:24.934" endtime="20200601 18:31:25.966"></status>
-</kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>5s</arg>
-</arguments>
-<msg timestamp="20200601 18:31:30.968" level="INFO">Slept 5 seconds</msg>
-<status status="PASS" starttime="20200601 18:31:25.966" endtime="20200601 18:31:30.968"></status>
-</kw>
-<kw name="Reload Page" library="SeleniumLibrary">
-<doc>Simulates user reloading page.</doc>
-<status status="PASS" starttime="20200601 18:31:30.968" endtime="20200601 18:31:33.723"></status>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${field-companyName}</arg>
-</arguments>
-<msg timestamp="20200601 18:31:33.724" level="INFO">Clicking element 'id=field-companyName'.</msg>
-<status status="PASS" starttime="20200601 18:31:33.723" endtime="20200601 18:31:34.810"></status>
-</kw>
-<kw name="Press Keys" library="SeleniumLibrary">
-<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<arguments>
-<arg>${field-companyName}</arg>
-<arg>\\127</arg>
-</arguments>
-<msg timestamp="20200601 18:31:34.812" level="INFO">Sending key(s) ('\\127',) to id=field-companyName element.</msg>
-<msg timestamp="20200601 18:31:36.094" level="INFO">Sending keys \127</msg>
-<status status="PASS" starttime="20200601 18:31:34.811" endtime="20200601 18:31:36.658"></status>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${field-companyName}</arg>
-<arg>${companyName}</arg>
-</arguments>
-<msg timestamp="20200601 18:31:36.659" level="INFO">Typing text 'Dream High' into text field 'id=field-companyName'.</msg>
-<status status="PASS" starttime="20200601 18:31:36.659" endtime="20200601 18:31:38.394"></status>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${save-btn}</arg>
-</arguments>
-<msg timestamp="20200601 18:31:38.395" level="INFO">Clicking element '//*[@class="MuiButton-label"]/span'.</msg>
-<status status="PASS" starttime="20200601 18:31:38.395" endtime="20200601 18:31:39.484"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:31:18.030" endtime="20200601 18:31:39.485"></status>
-</kw>
-<kw name="Close All Browsers" library="SeleniumLibrary" type="teardown">
-<doc>Closes all open browsers and resets the browser cache.</doc>
-<status status="PASS" starttime="20200601 18:31:39.486" endtime="20200601 18:31:40.058"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:30:53.018" endtime="20200601 18:31:40.058" critical="yes"></status>
+<status status="PASS" endtime="20200605 10:15:50.510" critical="yes" starttime="20200605 10:15:49.893"></status>
 </test>
-<test id="s1-t5" name="TC05 : Toast should not appear if merchant updated payment information.">
-<kw name="Open merchant browser" library="Keyword_login">
-<kw name="Open Browser" library="SeleniumLibrary">
-<doc>Opens a new browser instance to the optional ``url``.</doc>
+<test id="s1-t5" name="TC05 : Merchant was deleted by admin">
+<kw name="Delete merchant by email" library="Keyword_api_backoffice">
 <arguments>
-<arg>${merchant_url}</arg>
-<arg>chrome</arg>
+<arg>200</arg>
+<arg>${email-delete}</arg>
 </arguments>
-<msg timestamp="20200601 18:31:40.062" level="INFO">Opening browser 'chrome' to base url 'https://staging.pay-lo.com/merchant/signin'.</msg>
-<status status="PASS" starttime="20200601 18:31:40.061" endtime="20200601 18:31:45.863"></status>
-</kw>
-<kw name="Maximize Browser Window" library="SeleniumLibrary">
-<doc>Maximizes current browser window.</doc>
-<status status="PASS" starttime="20200601 18:31:45.864" endtime="20200601 18:31:46.507"></status>
-</kw>
-<kw name="Set Selenium Speed" library="SeleniumLibrary">
-<doc>Sets the delay that is waited after each Selenium command.</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
 <arguments>
-<arg>0.5</arg>
+<arg>delete</arg>
+<arg>${api-staging}</arg>
+<arg>disable_warnings=0</arg>
 </arguments>
-<status status="PASS" starttime="20200601 18:31:46.507" endtime="20200601 18:31:46.508"></status>
+<msg timestamp="20200605 10:15:50.512" level="INFO">Creating Session using : alias=delete, url=https://staging-api-manage.pay-lo.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20200605 10:15:50.513" starttime="20200605 10:15:50.512"></status>
 </kw>
-<status status="PASS" starttime="20200601 18:31:40.060" endtime="20200601 18:31:46.508"></status>
-</kw>
-<kw name="Merchant login after admin approved account" library="Keyword_login">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
 <arguments>
-<arg>np@gmail.com</arg>
-<arg>${password}</arg>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${admin-token}</arg>
 </arguments>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200605 10:15:50.514" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTE2ODM3OTIsImlhdCI6MTU5MTA3ODk5Mn0.etU...</msg>
+<status status="PASS" endtime="20200605 10:15:50.514" starttime="20200605 10:15:50.513"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
 <arguments>
-<arg>${email-xpath}</arg>
-<arg>${email}</arg>
+<arg>email=${email}</arg>
 </arguments>
-<msg timestamp="20200601 18:31:46.509" level="INFO">Typing text 'np@gmail.com' into text field 'id=field-email'.</msg>
-<status status="PASS" starttime="20200601 18:31:46.509" endtime="20200601 18:31:48.251"></status>
+<assign>
+<var>&amp;{data}</var>
+</assign>
+<msg timestamp="20200605 10:15:50.515" level="INFO">&amp;{data} = { email=nathakrit.p+9@gmail.com }</msg>
+<status status="PASS" endtime="20200605 10:15:50.515" starttime="20200605 10:15:50.514"></status>
 </kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
+<kw name="Delete Request" library="RequestsLibrary">
+<doc>Send a DELETE request on the session object found using the</doc>
 <arguments>
-<arg>${continue-btn}</arg>
+<arg>delete</arg>
+<arg>/admin/merchants</arg>
+<arg>data=${data}</arg>
+<arg>headers=${headers}</arg>
 </arguments>
-<msg timestamp="20200601 18:31:48.251" level="INFO">Clicking element 'id=signin-button'.</msg>
-<status status="PASS" starttime="20200601 18:31:48.251" endtime="20200601 18:31:49.322"></status>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200605 10:15:51.073" level="INFO">DELETE Request : url=https://staging-api-manage.pay-lo.com/admin/merchants 
+ path_url=/admin/merchants 
+ headers={'Content-Length': '36', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.23.0', 'Connection': 'keep-alive', 'Content-Type': u'application/json', 'Authorization': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE4MjRmMDhmYjRmNDAwOGFhZjIzNjUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1OTE2ODM3OTIsImlhdCI6MTU5MTA3ODk5Mn0.etUcVqt6WirnaOoUihMKl1_PPTZ4G3CIXlNdP96tlaU'} 
+ body={"email": "nathakrit.p+9@gmail.com"} 
+ </msg>
+<msg timestamp="20200605 10:15:51.073" level="INFO">DELETE Response : url=https://staging-api-manage.pay-lo.com/admin/merchants 
+ status=200, reason=OK 
+ body={"message":"success deleted ."} 
+ </msg>
+<msg timestamp="20200605 10:15:51.074" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20200605 10:15:51.074" starttime="20200605 10:15:50.515"></status>
 </kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
 <arguments>
-<arg>5s</arg>
+<arg>${resp.status_code}</arg>
+<arg>${status}</arg>
 </arguments>
-<msg timestamp="20200601 18:31:54.324" level="INFO">Slept 5 seconds</msg>
-<status status="PASS" starttime="20200601 18:31:49.323" endtime="20200601 18:31:54.324"></status>
+<status status="PASS" endtime="20200605 10:15:51.075" starttime="20200605 10:15:51.074"></status>
 </kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${password-xpath}</arg>
-<arg>${password}</arg>
-</arguments>
-<msg timestamp="20200601 18:31:54.325" level="INFO">Typing text 'Bb$1234567890' into text field 'id=field-password'.</msg>
-<status status="PASS" starttime="20200601 18:31:54.325" endtime="20200601 18:31:56.045"></status>
+<status status="PASS" endtime="20200605 10:15:51.075" starttime="20200605 10:15:50.511"></status>
 </kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${login-btn}</arg>
-</arguments>
-<msg timestamp="20200601 18:31:56.046" level="INFO">Clicking element '//*[@class="MuiButton-label"]/span'.</msg>
-<status status="PASS" starttime="20200601 18:31:56.045" endtime="20200601 18:31:57.130"></status>
-</kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>5s</arg>
-</arguments>
-<msg timestamp="20200601 18:32:02.133" level="INFO">Slept 5 seconds</msg>
-<status status="PASS" starttime="20200601 18:31:57.130" endtime="20200601 18:32:02.133"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:31:46.508" endtime="20200601 18:32:02.133"></status>
-</kw>
-<kw name="Update payment information" library="Keyword_verify_info">
-<arguments>
-<arg>${iban}</arg>
-<arg>${vat}</arg>
-</arguments>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${setting-xpath}</arg>
-</arguments>
-<msg timestamp="20200601 18:32:02.135" level="INFO">Clicking element '//*[@class="indexview__Wrapper-sc-1157pxf-0 foUBSv"]/div/ul/li[4]'.</msg>
-<status status="PASS" starttime="20200601 18:32:02.135" endtime="20200601 18:32:03.318"></status>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${payments-xpath}</arg>
-</arguments>
-<msg timestamp="20200601 18:32:03.319" level="INFO">Clicking element '//*[@class="SubLayout__Wrapper-tjbii-0 ebCdun"]/div/ul/li[2]'.</msg>
-<status status="PASS" starttime="20200601 18:32:03.319" endtime="20200601 18:32:04.494"></status>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${field-iban}</arg>
-<arg>${iban}</arg>
-</arguments>
-<msg timestamp="20200601 18:32:04.496" level="INFO">Typing text 'DE91 1000 0000 0123 4567 89' into text field 'id=field-ibanNumber'.</msg>
-<status status="PASS" starttime="20200601 18:32:04.495" endtime="20200601 18:32:06.348"></status>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${field-vatNumber}</arg>
-<arg>${vat}</arg>
-</arguments>
-<msg timestamp="20200601 18:32:06.349" level="INFO">Typing text 'TT 223232342424' into text field 'id=field-vatNumber'.</msg>
-<status status="PASS" starttime="20200601 18:32:06.348" endtime="20200601 18:32:08.071"></status>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${save-btn}</arg>
-</arguments>
-<msg timestamp="20200601 18:32:08.072" level="INFO">Clicking element '//*[@class="MuiButton-label"]/span'.</msg>
-<status status="PASS" starttime="20200601 18:32:08.071" endtime="20200601 18:32:09.142"></status>
-</kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>3s</arg>
-</arguments>
-<msg timestamp="20200601 18:32:12.144" level="INFO">Slept 3 seconds</msg>
-<status status="PASS" starttime="20200601 18:32:09.142" endtime="20200601 18:32:12.144"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:32:02.134" endtime="20200601 18:32:12.144"></status>
-</kw>
-<kw name="Merchant logout" library="Keyword_verify_info">
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${logout}</arg>
-</arguments>
-<msg timestamp="20200601 18:32:12.146" level="INFO">Clicking element 'logout-link'.</msg>
-<status status="PASS" starttime="20200601 18:32:12.145" endtime="20200601 18:32:13.260"></status>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${confirm-logout}</arg>
-</arguments>
-<msg timestamp="20200601 18:32:13.261" level="INFO">Clicking element '//*[@class="MuiDialog-container MuiDialog-scrollPaper"]/div/div[3]/button[2]'.</msg>
-<status status="PASS" starttime="20200601 18:32:13.260" endtime="20200601 18:32:14.403"></status>
-</kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>3s</arg>
-</arguments>
-<msg timestamp="20200601 18:32:17.404" level="INFO">Slept 3 seconds</msg>
-<status status="PASS" starttime="20200601 18:32:14.403" endtime="20200601 18:32:17.405"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:32:12.145" endtime="20200601 18:32:17.405"></status>
-</kw>
-<kw name="Merchant login" library="Keyword_login">
-<arguments>
-<arg>np@gmail.com</arg>
-<arg>${password}</arg>
-</arguments>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${email-xpath}</arg>
-<arg>${merchant-email}</arg>
-</arguments>
-<msg timestamp="20200601 18:32:17.406" level="INFO">Typing text 'np@gmail.com' into text field 'id=field-email'.</msg>
-<status status="PASS" starttime="20200601 18:32:17.406" endtime="20200601 18:32:19.105"></status>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${continue-btn}</arg>
-</arguments>
-<msg timestamp="20200601 18:32:19.105" level="INFO">Clicking element 'id=signin-button'.</msg>
-<status status="PASS" starttime="20200601 18:32:19.105" endtime="20200601 18:32:20.169"></status>
-</kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>2s</arg>
-</arguments>
-<msg timestamp="20200601 18:32:22.170" level="INFO">Slept 2 seconds</msg>
-<status status="PASS" starttime="20200601 18:32:20.169" endtime="20200601 18:32:22.170"></status>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<arguments>
-<arg>${password-xpath}</arg>
-<arg>${merchant-pass}</arg>
-</arguments>
-<msg timestamp="20200601 18:32:22.171" level="INFO">Typing text 'Bb$1234567890' into text field 'id=field-password'.</msg>
-<status status="PASS" starttime="20200601 18:32:22.171" endtime="20200601 18:32:23.852"></status>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>${login-btn}</arg>
-</arguments>
-<msg timestamp="20200601 18:32:23.852" level="INFO">Clicking element '//*[@class="MuiButton-label"]/span'.</msg>
-<status status="PASS" starttime="20200601 18:32:23.852" endtime="20200601 18:32:24.927"></status>
-</kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>2s</arg>
-</arguments>
-<msg timestamp="20200601 18:32:26.928" level="INFO">Slept 2 seconds</msg>
-<status status="PASS" starttime="20200601 18:32:24.927" endtime="20200601 18:32:26.928"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:32:17.405" endtime="20200601 18:32:26.928"></status>
-</kw>
-<kw name="Verify toast disappear" library="Keyword_verify_info">
-<kw name="Element Should Not Be Visible" library="SeleniumLibrary">
-<doc>Verifies that the element identified by ``locator`` is NOT visible.</doc>
-<arguments>
-<arg>${toast-alert}</arg>
-</arguments>
-<msg timestamp="20200601 18:32:27.444" level="INFO">Element '//*[@class="MuiAlert-message"]/div/a' did not exist.</msg>
-<status status="PASS" starttime="20200601 18:32:26.930" endtime="20200601 18:32:27.444"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:32:26.929" endtime="20200601 18:32:27.444"></status>
-</kw>
-<kw name="Close All Browsers" library="SeleniumLibrary" type="teardown">
-<doc>Closes all open browsers and resets the browser cache.</doc>
-<status status="PASS" starttime="20200601 18:32:27.445" endtime="20200601 18:32:28.020"></status>
-</kw>
-<status status="PASS" starttime="20200601 18:31:40.059" endtime="20200601 18:32:28.021" critical="yes"></status>
+<status status="PASS" endtime="20200605 10:15:51.075" critical="yes" starttime="20200605 10:15:50.510"></status>
 </test>
-<status status="PASS" starttime="20200601 18:29:19.273" endtime="20200601 18:32:28.022"></status>
+<status status="PASS" endtime="20200605 10:15:51.076" starttime="20200605 10:15:44.520"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="5" fail="0">Critical Tests</stat>
-<stat pass="5" fail="0">All Tests</stat>
+<stat fail="0" pass="5">Critical Tests</stat>
+<stat fail="0" pass="5">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="5" fail="0" id="s1" name="Scenario#1">Scenario#1</stat>
+<stat fail="0" id="s1" name="Test APIs" pass="5">Test APIs</stat>
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20200601 18:29:19.526" level="ERROR">Error in file '/Users/bond/Documents/Paylo/common.robot': Importing test library 'HttpLibrary.HTTP' failed: SyntaxError: invalid syntax (__init__.py, line 16)
+<msg timestamp="20200605 10:15:44.644" level="ERROR">Error in file '/Users/bond/Documents/Paylo/common.robot': Importing test library 'SeleniumLibrary' failed: ImportError: cannot import name PY3
+Traceback (most recent call last):
+  File "/Users/bond/Library/Python/2.7/lib/python/site-packages/SeleniumLibrary/__init__.py", line 26, in &lt;module&gt;
+    from SeleniumLibrary.base import DynamicCore, LibraryComponent
+  File "/Users/bond/Library/Python/2.7/lib/python/site-packages/SeleniumLibrary/base/__init__.py", line 17, in &lt;module&gt;
+    from .context import ContextAware
+  File "/Users/bond/Library/Python/2.7/lib/python/site-packages/SeleniumLibrary/base/context.py", line 17, in &lt;module&gt;
+    from SeleniumLibrary.utils import escape_xpath_value
+  File "/Users/bond/Library/Python/2.7/lib/python/site-packages/SeleniumLibrary/utils/__init__.py", line 20, in &lt;module&gt;
+    from .types import is_falsy, is_noney, is_string, is_truthy, PY3, WINDOWS
+  File "/Users/bond/Library/Python/2.7/lib/python/site-packages/SeleniumLibrary/utils/types.py", line 19, in &lt;module&gt;
+    from robot.utils import PY3, is_truthy, is_falsy
+PYTHONPATH:
+  /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python27.zip
+  /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7
+  /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-darwin
+  /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac
+  /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac/lib-scriptpackages
+  /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk
+  /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-old
+  /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload
+  /Users/bond/Library/Python/2.7/lib/python/site-packages
+  /Library/Python/2.7/site-packages
+  /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python
+  /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/PyObjC
+  /Library/Python/2.7/site-packages/pip-20.0.2-py2.7.egg</msg>
+<msg timestamp="20200605 10:15:46.581" level="ERROR">Error in file '/Users/bond/Documents/Paylo/common.robot': Importing test library 'JSONLibrary' failed: ImportError: No module named JSONLibrary
 Traceback (most recent call last):
   None
 PYTHONPATH:
-  /Library/Frameworks/Python.framework/Versions/3.7/bin
-  /Library/Frameworks/Python.framework/Versions/3.7/lib/python37.zip
-  /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7
-  /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload
-  /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages</msg>
-<msg timestamp="20200601 18:29:19.695" level="ERROR">Error in file '/Users/bond/Documents/Paylo/Resources/Api/Keywords/Keyword_api_backoffice.robot': Setting variable '${api-approve}' failed: Variable '${merchant_id}' not found.</msg>
-<msg timestamp="20200601 18:29:19.699" level="ERROR">Error in file '/Users/bond/Documents/Paylo/Resources/Api/Keywords/Keyword_api_backoffice.robot': Setting variable '${api-reject}' failed: Variable '${merchant_id}' not found.</msg>
+  /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python27.zip
+  /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7
+  /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-darwin
+  /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac
+  /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac/lib-scriptpackages
+  /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk
+  /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-old
+  /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload
+  /Users/bond/Library/Python/2.7/lib/python/site-packages
+  /Library/Python/2.7/site-packages
+  /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python
+  /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/PyObjC
+  /Library/Python/2.7/site-packages/pip-20.0.2-py2.7.egg</msg>
+<msg timestamp="20200605 10:15:46.653" level="ERROR">Error in file '/Users/bond/Documents/Paylo/Resources/Api/Keywords/Keyword_api_backoffice.robot': Setting variable '${api-approve}' failed: Variable '${merchant_id}' not found.</msg>
+<msg timestamp="20200605 10:15:46.698" level="ERROR">Error in file '/Users/bond/Documents/Paylo/Resources/Api/Keywords/Keyword_api_backoffice.robot': Setting variable '${api-reject}' failed: Variable '${merchant_id}' not found.</msg>
 </errors>
 </robot>
