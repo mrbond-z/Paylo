@@ -14,5 +14,15 @@ TC03 : Backoffice can approve merchant.
 TC04 : Merchant can be able to login.
     Go to Login Api and send value             200
 
-TC05 : Merchant was deleted by admin 
+TC05 : Merchant was deleted by admin. 
     Delete merchant by email     200         ${email-delete}
+
+TC06 : Generate QR code.
+    Merchant login and get token        200
+
+TC06 : Get QR List information.
+    Get QR code      200
+
+TC07 : Delete QR code.
+    Delete qr code     200
+

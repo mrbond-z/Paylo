@@ -5,8 +5,8 @@
 #Manage api
 ${api-staging}              https://staging-api-manage.pay-lo.com
 #Merchant account
-${merchant_email}           paylomerchant1@gmail.com
-${merchant_password}        Paylo_123456
+${merchant_email}           nathakrit.p@gmail.com
+${merchant_password}        Bb$1234567890
 ${wrong-email}              wrong@gmail.com
 ${wrong-password}           xxxxxxxxx
 

@@ -5,7 +5,7 @@ Resource          ../../../common.robot
 
 *** Variables ***
 ${api-check-regis-email}      /merchants/login/email
-${api-merchant-login}        /merchants/login
+${api-merchant-login}        /merchants/login        
 
 
 *** Keywords ***
@@ -38,6 +38,10 @@ Verify Login fail
 
     ${resp}=  POST Request  merchant_login    ${api-merchant-login}     data=${data}    headers=${headers}
     Should Be Equal As Strings     ${resp.status_code}      ${status}
+
+
+
+         
 
 
    
