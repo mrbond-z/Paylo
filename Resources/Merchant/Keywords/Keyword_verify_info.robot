@@ -7,7 +7,7 @@ Verify merchant information
     [Arguments]      ${companyName}     ${registeredAddress}     ${businessType}     ${contactPerson}
     Click element     ${setting-xpath}
     Click element     ${profile-xpath}
-    Element Should Contain      ${profile-xpath}       Profile 
+    Element Should Contain      ${profile-xpath}       Tom
     # Element Should Contain      ${field-companyName}      ${companyName} 
     # Element Should Contain      ${field-registeredAddress}     ${registeredAddress}
     # Element Should Contain      ${field-businessType}         ${businessType}

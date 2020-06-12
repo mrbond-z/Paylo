@@ -4,8 +4,6 @@ Resource          ../../../common.robot
 *** Variables ***
 ${api-admin-login}       /admin/login
 ${api-get-merchant}      /admin/merchants
-${api-approve}           /admin/merchants/${merchant_id}/approve
-${api-reject}            /admin/merchants/${merchant_id}/reject
 ${api-delete-merchant}         /admin/merchants
 
 *** Keywords ***
@@ -75,17 +73,26 @@ Get merchant registered ID and reject
 
 Delete merchant by ID
     [Arguments]     ${status} 
-    Create Session     get merchant     ${api-staging}     disable_warnings=1
-    &{headers}=   Create Dictionary     Content-Type=application/json        Authorization=${admin-token}    page=1    perpage=1    status=1
+    #Get token
+    Create Session      admin_login     ${api-staging}       disable_warnings=0
+    &{headers}=   Create Dictionary     Content-Type=application/json     charset=utf-8
+    &{data}=    Create Dictionary     email=paylobackoffice@gmail.com      
+    ...   password=20Scoops#
+    ${resp}=  POST Request   admin_login     ${api-admin-login}     data=${data}    headers=${headers}
+    ${token}=    Get Json Value     ${resp.text}      /token
+    ${token}=    Remove String Using Regexp    ${token}    "
+    [Return]    ${token} 
+    #Get merchant id
+    Create Session     get merchant     ${api-staging}     disable_warnings=0
+    &{headers}=   Create Dictionary     Content-Type=application/json        Authorization=${token}    page=1    perpage=1    status=1
     
     ${resp}=  GET Request    get merchant      ${api-get-merchant}            headers=${headers}
-    Should Be Equal As Strings     ${resp.status_code}      ${status} 
-    ${merchant_id}=  Get Json Value  ${resp.text}  /data/0/id
+    ${merchant_id}=  Get Json Value    ${resp.text}    /data/0/id
     ${merchant_id}=  Remove String Using Regexp  ${merchant_id}  "
     [Return]  ${merchant_id}  
-
-    Create Session     delete     ${api-staging}     disable_warnings=1
-    &{headers}=   Create Dictionary     Content-Type=application/json        Authorization=${admin-token}    id=${merchant_id}
+    #Delete merchant
+    Create Session     delete     ${api-staging}     disable_warnings=0
+    &{headers}=   Create Dictionary     Content-Type=application/json        Authorization=${token}     id=${merchant_id}
     ${resp}=  DELETE Request    delete       /admin/merchants/${merchant_id}           headers=${headers}
     Should Be Equal As Strings     ${resp.status_code}      ${status} 
 

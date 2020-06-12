@@ -7,11 +7,11 @@ ${setting-xpath}        //*[@class="indexview__Wrapper-sc-1157pxf-0 foUBSv"]/div
 ${qr-xpath}        //*[@class="indexview__Wrapper-sc-1157pxf-0 foUBSv"]/div/ul/li[5]
 
 #Setting page
-${profile-xpath}     //*[@class="SubLayout__Wrapper-tjbii-0 ebCdun"]/div/ul/li[1]
-${payments-xpath}         //*[@class="SubLayout__Wrapper-tjbii-0 ebCdun"]/div/ul/li[2]
-${login-cre-xpath}      //*[@class="SubLayout__Wrapper-tjbii-0 ebCdun"]/div/ul/li[3]
-${finan-per-xpath}        //*[@class="SubLayout__Wrapper-tjbii-0 ebCdun"]/div/ul/li[4]
-${api-key-xpath}           //*[@class="SubLayout__Wrapper-tjbii-0 ebCdun"]/div/ul/li[5]
+${profile-xpath}     //*[@class="SubLayout__Wrapper-tjbii-0 cowYMi"]/div/div[2]
+${payments-xpath}         //*[@class="SubLayout__Wrapper-tjbii-0 cowYMi"]/div/ul/li[2]
+${login-cre-xpath}      //*[@class="SubLayout__Wrapper-tjbii-0 cowYMi"]/div/ul/li[3]
+${finan-per-xpath}        //*[@class="SubLayout__Wrapper-tjbii-0 cowYMi"]/div/ul/li[4]
+${api-key-xpath}           //*[@class="SubLayout__Wrapper-tjbii-0 cowYMi"]/div/ul/li[5]
 
 #Activity page
 ${payment-status}        //*[@class="Table__TableBody-sc-1d7s95x-3 efpxeA"]/tr[3]/td[2]/div/span

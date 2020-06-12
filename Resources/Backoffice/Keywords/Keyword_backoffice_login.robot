@@ -10,7 +10,7 @@ Open backoffice browser
 
 Backoffice login
     [Arguments]           ${backoffice-email}        ${backoffice-pass}        
-    Input text     ${email-xpath}       ${backoffice-email}
+    Input text     ${email-field}       ${backoffice-email}
     Click element     ${continue-btn} 
     Sleep    2s
     Input text     ${password-xpath}      ${backoffice-pass}

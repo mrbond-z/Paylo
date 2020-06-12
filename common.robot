@@ -17,6 +17,9 @@ Resource    Resources/Api/Keywords/Keyword_api_pay.robot
 Resource    Resources/Api/Keywords/Keyword_api_merchant_regis.robot
 Resource    Resources/Api/Keywords/Keyword_api_backoffice.robot
 Resource    Resources/Api/Keywords/Keyword_api_qrcode.robot
+Resource    Resources/Api/Keywords/Keyword_api_merchant_forgetpassword.robot
+Resource    Resources/Api/Keywords/Keyword_api_balance.robot
+Resource    Resources/Api/Keywords/Keyword_api_set_cashback.robot
 #Variables APIs
 Resource    Resources/Api/Variables/Api_variables.robot
 #---------------------------------------------------------------------------#

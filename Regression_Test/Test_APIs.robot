@@ -15,7 +15,7 @@ TC04 : Merchant can be able to login.
     Go to Login Api and send value             200
 
 TC05 : Merchant was deleted by admin. 
-    Delete merchant by email     200         ${email-delete}
+    Delete merchant by ID       200         
 
 TC06 : Generate QR code.
     Merchant login and get token        200
@@ -26,3 +26,9 @@ TC06 : Get QR List information.
 TC07 : Delete QR code.
     Delete qr code     200
 
+TC08 : Backoffice setting global cashback for all merchants.
+    Admin setting global cashback in percent     200       10     10     10    
+    Admin setting global cashback in percent     200       5     100     5          #reset value back 
+
+TC09 : Backoffice setting specific merchant cashback.
+    Admin setting merchant cashback in percent     200

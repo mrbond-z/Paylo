@@ -10,7 +10,7 @@ Open merchant browser
 
 Merchant login
     [Arguments]           ${merchant-email}        ${merchant-pass}         
-    Input text     ${email-field}        ${merchant-email}
+    Input text      ${email-field}        ${merchant-email}
     Click element     ${continue-btn} 
     Sleep    2s
     Input text     ${password-xpath}      ${merchant-pass}
@@ -23,7 +23,7 @@ Verify login success
 
 Merchant login after admin approved account
     [Arguments]           ${email}        ${password}         
-    Input text     ${email-xpath}       ${email}
+    Input text     ${email-field}       ${email}
     Click element     ${continue-btn} 
     Sleep    5s
     Input text     ${password-xpath}      ${password}
