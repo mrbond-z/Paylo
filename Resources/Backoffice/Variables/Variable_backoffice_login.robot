@@ -9,11 +9,11 @@ ${backoffice-email}      paylobackoffice@gmail.com
 ${backoffice-pass}       20Scoops#
 
 #Verify login 
-${verify-backoffice-login}       //*[@id="root"]/main/div[1]/aside/div[2]/div/div/div[2]/div/div[2]/h5
+${verify-backoffice-login}       //*[@class="indexview__Detail-sc-1xe4kbd-4 biAUkl"]/h5
 ${backoffice-name}        Paylo Backoffice
 
 #Dashboard
-${merchant-menu}         //*[@id="merchants-link"]/span
+${merchant-menu}         //*[@class="indexview__SidebarTop-sc-17scg71-1 fMJGjG"]/ul/li[3]
 
 #Merchant page
 ${approve-btn}         //*[@class="indexview__ApproveButton-f6kizg-13 kwXILV"]

@@ -32,3 +32,6 @@ TC08 : Backoffice setting global cashback for all merchants.
 
 TC09 : Backoffice setting specific merchant cashback.
     Admin setting merchant cashback in percent     200
+
+TC10 : Delete merchant.         #np@gmail.com
+    Delete merchant by ID      200
